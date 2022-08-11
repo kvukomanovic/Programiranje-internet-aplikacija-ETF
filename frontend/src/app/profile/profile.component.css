@@ -1,0 +1,13 @@
+.firstColumn{
+    background-color: bisque;
+    text-align: right;
+}
+.firstColumn,.secondColumn{
+    height: 30px;
+    
+    border: solid 1px black;
+}
+.secondColumn{
+    width: 200px;
+    text-align: left;
+}

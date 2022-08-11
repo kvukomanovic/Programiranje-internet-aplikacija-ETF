@@ -1,0 +1,71 @@
+<h2>{{book.title}}</h2>
+<table>
+<tr>
+    <td>
+<img src="/assets/books/{{book.pic}}">
+<table id="t">
+   
+    <tr>
+        <td>Naziv: </td>
+        <td>{{book.title}}</td>
+    </tr>
+    <tr>
+        <td>Autori: </td>
+        <td><ul><li *ngFor="let a of book.author">{{a}}</li></ul></td>
+    </tr>
+    <tr>
+        <td>Zanr: </td>
+        <td><ul><li *ngFor="let z of book.genre">{{z}}</li></ul></td>
+    </tr>
+    <tr>
+        <td>Izdavac: </td>
+        <td>{{book.publisher}}</td>
+    </tr>
+    <tr>
+        <td>Godina izdavanja: </td>
+        <td>{{book.year}}</td>
+    </tr>
+    <tr>
+        <td>Jezik: </td>
+        <td>{{book.language}}</td>
+    </tr>
+</table></td>
+<td>
+    Na stanju: {{book.available}}
+    <button [disabled]="!prikaziDugme" (click)="zaduzi()">Zaduzi</button>
+    <br>
+    <span style="color:crimson">{{message}}</span>
+</td>
+</tr>
+</table>
+<hr>
+<h2 *ngIf="!imaKomentaraF()" style="color:orange; font-weight: bolder;">Nema ocena i komentara za ovu knjigu. Budite prvi koji ce komentarisati!</h2>
+<div *ngIf="imaKomentaraF()">
+    
+    <h3>Prosecna ocena: {{prosecnaOcenaF()}} <br></h3>
+    <h3 style="background-color: khaki">Komentari:</h3>
+    <table>
+        <tr *ngFor="let c of book.comments" style="background-color:blanchedalmond">
+            <td>
+                <div id="user">{{c.username}} : {{c.rating}}<br> </div>
+                <div id="timestamp"> {{c.timestamp.slice(0,10)}} {{c.timestamp.slice(11,16)}} <br></div>
+                <div id="comment">{{c.comment}}</div>
+            </td>
+        </tr>
+   
+    </table>
+</div>
+<div *ngIf="mozeDaKomentariseF()">
+    <h3 style="background-color: lightsteelblue">Dodaj komentar:</h3>
+    <div style="background-color: lavender">
+    <div style="font-size: larger">Ocena:
+                    <select [(ngModel)]="rating"> 
+                        <option *ngFor='let i of "1,2,3,4,5,6,7,8,9,10".split(",")'>{{i}}</option>
+                    </select><br>
+    </div>
+    <div style="font-size: larger">Komentar:</div>
+    <input type="text" maxlength="1000" style="width: 50%; height: 50pt" [(ngModel)]="comment">
+    <br>
+    <button (click)="addComment()">Dodaj komentar</button> </div>
+</div>
+

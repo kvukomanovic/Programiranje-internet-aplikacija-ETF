@@ -1,0 +1,52 @@
+<h3>Dodaj novu knjigu:</h3>
+
+<div>
+
+    <table>
+        <tr>
+            <td>Naziv:</td>
+            <td><input type="text" [(ngModel)]="title"></td>
+        </tr>
+        <tr>
+            <td>Autori:</td>
+            <td><input type="text" [(ngModel)]="author[0]"></td>
+            <td><input type="text" [(ngModel)]="author[1]"></td>
+            <td><input type="text" [(ngModel)]="author[2]"></td>
+        </tr>
+        <tr>
+            <td>Zanr:</td>
+            <td><input type="text" [(ngModel)]="genre[0]"></td>
+            <td><input type="text" [(ngModel)]="genre[1]"></td>
+            <td><input type="text" [(ngModel)]="genre[2]"></td>
+        </tr>
+        <tr>
+            <td>Izdavac:</td>
+            <td><input type="text" [(ngModel)]="publisher"></td>
+        </tr>
+        <tr>
+            <td>Godina izdavanja:</td>
+            <td><input type="text" [(ngModel)]="year"></td>
+        </tr>
+        <tr>
+            <td>Jezik:</td>
+            <td><input type="text" [(ngModel)]="language"></td>
+        </tr>
+        <tr>
+            <td>Slika:</td>
+            <td><input type="file" [(ngModel)]="picture" accept=".jpg,.png" (change)="change($event)">
+                <input class="btn-signup btn-plain btn-green btn-curved" type="submit" value="SignUp"></td>
+        </tr>
+        <tr>
+            <td><button (click)="submit()"> Submit</button></td>
+        </tr>
+    </table>
+
+
+
+
+
+
+
+
+
+</div>

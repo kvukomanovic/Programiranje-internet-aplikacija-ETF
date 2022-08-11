@@ -1,0 +1,34 @@
+img{
+    max-width: 300px;
+    max-height: 480px;
+    height: auto;
+    width: auto;
+}
+#t{
+    width: 90%;
+    border: 2px purple;
+    border-style: dotted;
+}
+#t tr{
+    border: 2px purple;
+    border-style: dotted;
+}
+#t td{
+    border: 2px purple;
+    border-style: dotted;
+    height: 30px;
+}
+table{
+    width: 70%;
+}
+#user{
+    font-size: larger;
+     font-weight: bold;
+}
+#timestamp{
+    font-weight: lighter;
+    font-size: smaller;
+}
+#comment{
+    font-size: larger;
+}

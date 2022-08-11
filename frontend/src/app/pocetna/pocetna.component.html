@@ -1,0 +1,26 @@
+
+<h2>Pregled 3 najbolje knjige:</h2>
+<table class="books">
+    <tr>
+        <th>Title</th>
+        <th>Author/s</th>
+        <th>Genre</th>
+    </tr>
+    <tr *ngFor="let b of books">
+        <td>{{b.title}}</td>
+
+        <td>
+            <ul >
+            
+               <li *ngFor="let a of b.author">{{a}}</li>
+                
+            </ul>
+        </td>
+        <td>
+            <ul>
+               <li  *ngFor="let g of b.genre">{{g}}</li>
+            </ul>
+        </td>
+    </tr>
+   
+</table>

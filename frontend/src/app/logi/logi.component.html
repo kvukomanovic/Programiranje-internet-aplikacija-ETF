@@ -1,0 +1,63 @@
+<h3>Prijava</h3>
+<table id="login">
+    <tr>
+        <td>Korisnicko ime:</td>
+        <td><input type="text" name="username" [(ngModel)]="username"><br></td>
+    </tr>
+    <tr>
+        <td>Lozinka:</td>
+        <td><input type="password" name="password" [(ngModel)]="password"><br></td>
+    </tr>
+    <tr>
+        <td><button (click)="login()">Prijava</button></td>
+    </tr>
+   
+</table>
+<span style="color:red">{{message}}</span>
+<table>
+
+
+<hr>
+<h3>Registracija</h3>
+<table>
+    <tr>
+        <td>Korisnicko ime:</td>
+        <td><input type="text" [(ngModel)]="usernameR"><br></td>
+    </tr>
+    <tr>
+        <td>Lozinka:</td>
+        <td><input type="text" [(ngModel)]="passwordR"><br></td>
+    </tr>
+    <tr>
+        <td>Ponovljena lozinka:</td>
+        <td><input type="text" [(ngModel)]="password2R"><br></td>
+    </tr>
+    <tr>
+        <td>Ime:</td>
+        <td><input type="text" [(ngModel)]="firstnameR"><br></td>
+    </tr>
+    <tr>
+        <td>Prezime:</td>
+        <td><input type="text" [(ngModel)]="lastnameR"><br></td>
+    </tr>
+    <tr>
+        <td>Adresa:</td>
+        <td><input type="text" [(ngModel)]="addressR"><br></td>
+    </tr>
+    <tr>
+        <td>Kontakt telefon:</td>
+        <td><input type="text" [(ngModel)]="phoneR"><br></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td><input type="text" [(ngModel)]="emailR"><br></td>
+    </tr>
+    <!--
+        slika
+    -->
+    <tr>
+        <td><button (click)="register()">Prijava</button></td>
+    </tr>
+
+</table>
+<span style="color:red">{{messageR}}</span>

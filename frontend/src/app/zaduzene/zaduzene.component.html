@@ -1,0 +1,64 @@
+<div *ngIf="ready">
+
+    
+
+        <table>
+            <tr>
+                <td *ngFor="let b of zaduzenja">
+                 <div class="card">
+                     <img src="/assets/books/{{pic(b)}}" style="max-width:200px; max-height: 200px;">
+                        <div class="container">
+                         <h4><b>{{b.title}}</b></h4>
+                         <span *ngFor="let a of authors(b.bookID)">{{a}} <br></span>
+                         <span *ngIf="dana(b)>=0" style="color:green">Preostalo dana: {{dana(b)}}</span>
+                         <span *ngIf="dana(b)<0" style="color:red; font-weight: bolder;">Kasnite dana: {{-dana(b)}}</span>
+                        </div>
+                        <footer>
+                            <button (click)="razduzi(b)">Razduzi</button>
+                        </footer>
+                 </div>
+                </td>
+                
+            </tr>
+        </table>
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

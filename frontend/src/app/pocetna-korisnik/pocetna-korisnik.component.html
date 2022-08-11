@@ -1,0 +1,12 @@
+<h2>Knjiga dana!</h2>
+<div *ngIf="ready">
+<img *ngIf="ready" src="/assets/books/{{randomBook.pic}}"> <br>
+<table>
+ <tr>
+    <td style="font-style: oblique; font-weight: bolder;">{{randomBook.title}}</td>
+    <td *ngFor="let a of randomBook.author">, {{a}}</td> 
+ </tr>
+</table>
+Prosecna ocena:{{prosecnaOcena()}}
+</div>
+

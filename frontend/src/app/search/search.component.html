@@ -1,0 +1,42 @@
+<h2>Pretrazite biblioteku:</h2>
+<table>
+    <tr>
+        <td>Naziv:</td>
+        <td><input type="text" name="title" [(ngModel)]="title"></td>
+    </tr>
+    <tr>
+        <td>Autor:</td>
+        <td><input type="text" name="author" [(ngModel)]="author"></td>
+    </tr>
+    <tr>
+        <td>
+            <button (click)="search()">Pretrazi</button>
+        </td>
+    </tr>
+</table>
+
+<hr>
+<form *ngIf="searched" name="searched">
+    <h3>Rezultat pretrage:</h3>
+    <span style="color:orange">{{message}}</span><br><br>
+    <table id="searched" *ngIf="show">
+        <tr>
+            <th>Naziv</th>
+            <th>Autor</th>
+            <th>Zanr</th>
+            <th>Izdavac</th>
+            <th>Godina izdavanja</th>
+            <th>Jezik</th>
+            <th>Korice</th>
+        </tr>
+        <tr *ngFor="let b of searchedBooks" (click)="detalji(b)">
+            <td>{{b.title}}</td>
+            <td><ul><li *ngFor="let a of b.author">{{a}}</li></ul></td>
+            <td><ul><li *ngFor="let z of b.genre">{{z}}</li></ul></td>
+            <td>{{b.publisher}}</td>
+            <td>{{b.year}}</td>
+            <td>{{b.language}}</td>
+            <td><img src='/assets/books/{{b.pic}}' max></td>
+        </tr>
+    </table>
+</form>

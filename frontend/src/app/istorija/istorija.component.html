@@ -1,0 +1,23 @@
+<div *ngIf="ready">
+
+ <table matSort (matSortChange)="sortData($event)">
+    <tr>
+        <th mat-sort-header="naziv"> Naziv</th>
+        <th mat-sort-header="autori">Autori</th>
+        <th mat-sort-header="datumZ">Datum zaduzivanja</th>
+        <th mat-sort-header="datumV">Datum vracanja</th>
+        <th>Detalji o knjizi</th>
+    </tr>
+    <tr *ngFor="let b of zaduzivanja">
+        <td>{{b.title}}</td>
+        <td><span *ngFor="let a of authors(b.bookID)">{{a}} </span></td>
+        <td>{{b.date}}</td>
+        <td *ngIf="b.returned">{{b.returned}}</td>
+        <td *ngIf="!b.returned">Nije vraceno</td>
+        <td><button (click)="detalji(b)">Vise detalja</button></td>
+    </tr>
+
+ </table>
+
+
+</div>
