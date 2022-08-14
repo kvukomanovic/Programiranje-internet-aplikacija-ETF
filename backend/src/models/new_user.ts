@@ -29,7 +29,7 @@ let New_User = new Schema({
         type:String
     },
     picture:{
-        type:Number
+        type:String
     }
     ,
     type:{

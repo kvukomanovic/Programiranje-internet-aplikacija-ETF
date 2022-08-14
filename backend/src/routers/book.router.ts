@@ -28,4 +28,17 @@ booksRouter.route('/addComment').post(
 booksRouter.route('/razduzi').post(
     (req, res)=>new BooksController().razduzi(req, res)
 )
+booksRouter.route('/addBook').post(
+    (req, res)=>new BooksController().addBook(req, res)
+)
+booksRouter.route('/editBook').post(
+    (req, res)=>new BooksController().editBook(req, res)
+)
+booksRouter.route('/deleteBook').post(
+    (req, res)=>new BooksController().deleteBook(req, res)
+)
+booksRouter.route('/notReturnedBorrowingForBook').post(
+    (req, res)=>new BooksController().notReturnedBorrowingForBook(req, res)
+)
+
 export default booksRouter;

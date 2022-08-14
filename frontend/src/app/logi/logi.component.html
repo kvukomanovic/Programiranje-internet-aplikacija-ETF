@@ -14,50 +14,53 @@
    
 </table>
 <span style="color:red">{{message}}</span>
-<table>
-
 
 <hr>
 <h3>Registracija</h3>
+<form>
 <table>
     <tr>
         <td>Korisnicko ime:</td>
-        <td><input type="text" [(ngModel)]="usernameR"><br></td>
+        <td><input type="text" [(ngModel)]="usernameR" name="uR"></td>
     </tr>
     <tr>
         <td>Lozinka:</td>
-        <td><input type="text" [(ngModel)]="passwordR"><br></td>
+        <td><input type="password" [(ngModel)]="passwordR" name="cga"></td>
     </tr>
     <tr>
         <td>Ponovljena lozinka:</td>
-        <td><input type="text" [(ngModel)]="password2R"><br></td>
+        <td><input type="password" [(ngModel)]="password2R" name="ga"></td>
     </tr>
     <tr>
         <td>Ime:</td>
-        <td><input type="text" [(ngModel)]="firstnameR"><br></td>
+        <td><input type="text" [(ngModel)]="firstnameR" name="fa"></td>
     </tr>
     <tr>
         <td>Prezime:</td>
-        <td><input type="text" [(ngModel)]="lastnameR"><br></td>
+        <td><input type="text" [(ngModel)]="lastnameR" name="ad"></td>
     </tr>
     <tr>
         <td>Adresa:</td>
-        <td><input type="text" [(ngModel)]="addressR"><br></td>
+        <td><input type="text" [(ngModel)]="addressR" name="da"></td>
     </tr>
     <tr>
         <td>Kontakt telefon:</td>
-        <td><input type="text" [(ngModel)]="phoneR"><br></td>
+        <td><input type="text" [(ngModel)]="phoneR" name="aa"></td>
     </tr>
     <tr>
         <td>Email:</td>
-        <td><input type="text" [(ngModel)]="emailR"><br></td>
+        <td><input type="text" [(ngModel)]="emailR" name="fa"></td>
     </tr>
-    <!--
-        slika
-    -->
     <tr>
-        <td><button (click)="register()">Prijava</button></td>
+        <td>Slika:</td>
+    </tr>
+    <tr>
+        <td><input type="file" accept=".jpg,.png" (change)="change($event)">
+            <div class="selected-image no-border" *ngIf="image!=null" ><img style="max-width: 100px; max-height: 100px;" src="{{image}}" /></div>
+        </td>
     </tr>
 
 </table>
+    <button type="submit" (click)="register()">Registruj se</button>
+</form>
 <span style="color:red">{{messageR}}</span>

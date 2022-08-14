@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const user_1 = __importDefault(require("../models/user"));
-const new_user_1 = __importDefault(require("../models/new_user"));
+const mongodb_1 = require("mongodb");
 class UsersController {
     constructor() {
         this.login = (req, res) => {
@@ -29,7 +29,8 @@ class UsersController {
                         else if (resp2 != null)
                             res.json({ "message": "Email already taken! Please choose another." });
                         /*email ok */ else {
-                            let user = new new_user_1.default(req.body);
+                            let user = new user_1.default(req.body);
+                            user._id = new mongodb_1.ObjectId();
                             user.save((err3, resp3) => {
                                 if (err3) {
                                     console.log(err3);
@@ -44,6 +45,24 @@ class UsersController {
         };
         this.getRok = (req, res) => {
             user_1.default.findOne({ 'type': "admin" }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(resp);
+            });
+        };
+        /*-------------------------------------------------- */
+        this.getAllUsers = (req, res) => {
+            user_1.default.find({}, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(resp);
+            });
+        };
+        this.getUser = (req, res) => {
+            let _id = req.body._id;
+            user_1.default.findOne({ '_id': _id }, (err, resp) => {
                 if (err)
                     console.log(err);
                 else

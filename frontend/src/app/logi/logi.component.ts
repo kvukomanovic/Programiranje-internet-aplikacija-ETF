@@ -30,6 +30,8 @@ export class LogiComponent implements OnInit {
   addressR:string;
   phoneR:string;
   emailR:string;
+  image:any;
+  image_data;
 
   messageR:string;
 
@@ -48,19 +50,10 @@ export class LogiComponent implements OnInit {
   register(){
     if (this.password2R!=this.passwordR) this.messageR="Pogresno uneta lozinka!";
     else{
-      let data={
-        username:this.usernameR,
-        password:this.passwordR,
-        firstname:this.firstnameR,
-        lastname:this.lastnameR,
-        email:this.emailR,
-        phone:this.phoneR,
-        address:this.addressR,
-        picture:this.usernameR,
-        type:"citalac"
-      }
-      this.userService.register(data).subscribe((resp)=>{
+      this.userService.register(this.usernameR,this.passwordR,this.firstnameR,this.lastnameR,this.emailR,this.phoneR,this.addressR,this.image_data).subscribe((resp)=>{
         if (resp["message"]=="ok") {
+          this.messageR="";
+          alert("Uspesno ste se registrovali!");
          // this.router.navigate([""]);
         }
         else this.messageR=resp["message"];
@@ -70,5 +63,17 @@ export class LogiComponent implements OnInit {
     }
     
   }
- 
+  /*--------------------------------------------------- */
+  change(event){
+    let input = event.target;
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+      reader.readAsDataURL(input.files[0]);
+      reader.onloadend = (e) => {
+        this.image_data = reader.result;
+        this.image = reader.result;
+      }
+
+    }
+  }
 }

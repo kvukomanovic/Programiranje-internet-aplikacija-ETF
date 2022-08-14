@@ -1,0 +1,13 @@
+td{
+    border-bottom: 1px solid;
+    font-size: smaller;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+th{
+    background-color: antiquewhite;
+}
+input{
+    padding: 2px 2px 2px 2px;
+    width: 95%;
+}

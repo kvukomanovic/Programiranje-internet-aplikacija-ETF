@@ -1,40 +1,62 @@
+<div *ngIf="ready">
+
 <h2>{{book.title}}</h2>
 <table>
 <tr>
     <td>
-<img src="/assets/books/{{book.pic}}">
-<table id="t">
-   
-    <tr>
+<img *ngIf="!izmena" src="{{book.pic}}">
+<div *ngIf="izmena">
+    <input type="file" accept=".jpg,.png" (change)="change($event)">
+        <div class="selected-image no-border" *ngIf="image!=null"><img style="max-width: 100px; max-height: 100px;" src="{{image}}" /></div>
+</div>
+<table id="t" >
+    <tr> 
         <td>Naziv: </td>
-        <td>{{book.title}}</td>
+        <td *ngIf="!izmena">{{book.title}}</td>
+        <td *ngIf="izmena"><input [(ngModel)]="book.title" type="text" value="{{book.title}}"></td>
     </tr>
     <tr>
         <td>Autori: </td>
-        <td><ul><li *ngFor="let a of book.author">{{a}}</li></ul></td>
+        <td *ngIf="!izmena"><ul><li *ngFor="let a of book.author">{{a}}</li></ul></td>
+        <td *ngIf="izmena"><ul>
+           <li><input type="text" value="book.author[0]" [(ngModel)]="book.author[0]"></li>
+           <li><input type="text" value="book.author[1]" [(ngModel)]="book.author[1]"></li>
+           <li><input type="text" value="book.author[2]" [(ngModel)]="book.author[2]"></li>
+        </ul></td>
     </tr>
     <tr>
         <td>Zanr: </td>
-        <td><ul><li *ngFor="let z of book.genre">{{z}}</li></ul></td>
+        <td *ngIf="!izmena"><ul><li *ngFor="let z of book.genre" [contentEditable]="izmena">{{z}}</li></ul></td>
+        <td *ngIf="izmena"><ul>
+            <li><input type="text" value="book.genre[0]" [(ngModel)]="book.genre[0]"></li>
+            <li><input type="text" value="book.genre[1]" [(ngModel)]="book.genre[1]"></li>
+            <li><input type="text" value="book.genre[2]" [(ngModel)]="book.genre[2]"></li>
+         </ul></td>
     </tr>
     <tr>
         <td>Izdavac: </td>
-        <td>{{book.publisher}}</td>
+        <td *ngIf="!izmena">{{book.publisher}}</td>
+        <td *ngIf="izmena"><input type="text" value="book.publisher" [(ngModel)]="book.publisher"></td>
     </tr>
     <tr>
         <td>Godina izdavanja: </td>
-        <td>{{book.year}}</td>
+        <td *ngIf="!izmena">{{book.year}}</td>
+        <td *ngIf="izmena"><input type="text" value="book.year" [(ngModel)]="book.year"></td>
     </tr>
     <tr>
         <td>Jezik: </td>
-        <td>{{book.language}}</td>
+        <td *ngIf="!izmena">{{book.language}}</td>
+        <td *ngIf="izmena"><input type="text" value="book.language" [(ngModel)]="book.language"></td>
     </tr>
 </table></td>
 <td>
-    Na stanju: {{book.available}}
-    <button [disabled]="!prikaziDugme" (click)="zaduzi()">Zaduzi</button>
+    Na stanju: <p *ngIf="!izmena" style="font-weight: bolder;">{{book.available}}</p><p *ngIf="izmena"><input type="number" min="0" value="book.available" [(ngModel)]="book.available"></p>
+    <button [disabled]="!prikaziDugme" (click)="zaduzi()">Zaduzi</button><br>
     <br>
     <span style="color:crimson">{{message}}</span>
+    <button *ngIf="user.type!='citalac' && !izmena" (click)="izmeni()">Izmeni informacije</button>
+    <button *ngIf="izmena" (click)="sacuvaj()">Sacuvaj izmene</button>
+    <br><br><button *ngIf="user.type=='admin'" (click)="obrisiKnjigu()">Obrisi knjigu</button><br>
 </td>
 </tr>
 </table>
@@ -69,3 +91,4 @@
     <button (click)="addComment()">Dodaj komentar</button> </div>
 </div>
 
+</div>

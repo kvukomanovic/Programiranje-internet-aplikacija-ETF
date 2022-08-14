@@ -1,0 +1,16 @@
+<h3>Prijava za admina</h3>
+<table id="login">
+    <tr>
+        <td>Korisnicko ime:</td>
+        <td><input type="text" name="username" [(ngModel)]="username"><br></td>
+    </tr>
+    <tr>
+        <td>Lozinka:</td>
+        <td><input type="password" name="password" [(ngModel)]="password"><br></td>
+    </tr>
+    <tr>
+        <td><button (click)="login()">Prijava</button></td>
+    </tr>
+   
+</table>
+<span style="color:red">{{message}}</span>

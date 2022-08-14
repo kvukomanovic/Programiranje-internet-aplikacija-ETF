@@ -11,6 +11,7 @@ import { User } from './models/user';
 export class AppComponent implements OnInit, OnChanges{
   constructor(private router:Router,private eventEmmiter:EventEmmiterService){}
   ngOnInit(): void {
+    this.listen();
     this.user=JSON.parse(localStorage.getItem("user"));    
   }
   listen(){

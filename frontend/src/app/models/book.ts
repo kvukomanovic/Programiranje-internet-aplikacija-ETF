@@ -8,7 +8,7 @@ export class Book{
     publisher:string;
     year:string;
     language:string;
-    pic:string;
+    pic:Buffer;
     available:number;
     issued:number;
     comments:Array<Comment>;

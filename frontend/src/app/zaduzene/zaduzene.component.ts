@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BooksService } from '../books.service';
 import { Book } from '../models/book';
 import { Borrowing } from '../models/borrowing';
@@ -12,19 +13,21 @@ import { UserService } from '../user.service';
 })
 export class ZaduzeneComponent implements OnInit {
 
-  constructor(private booksService:BooksService,private userService:UserService) { }
+  constructor(private booksService:BooksService,private userService:UserService,private router:Router) { }
 
   ngOnInit(): void {
     this.zaduzenja=[];
     this.knjige=[];
     this.user=JSON.parse(localStorage.getItem("user"));
+    if (this.user==null) { this.router.navigate(['']); return;}
+    if (this.user.type=="admin") {this.router.navigate(['pocetnaKorisnik']); return;}
     this.booksService.borrowings(this.user.username).subscribe((books:Borrowing[])=>{
       if (books!=null){
         books.forEach(book=>{
           if (book.returned==null){
              this.zaduzenja.push(book);
              this.booksService.getBook(book.bookID).subscribe((book2:Book)=>{
-                this.knjige.push(book2);
+               this.knjige.push(book2);
              })
             }
         })
@@ -39,17 +42,13 @@ export class ZaduzeneComponent implements OnInit {
     })
 
   }
-  pic(zaduzenje:Borrowing):string{
-    return zaduzenje.title.replace(/\s/g, "").toLowerCase() + ".jpg";
-  }
-  authors(bookID:string):String[]{
-    let s=[];
+  pic(zaduzenje:Borrowing):any{
+    let bookID=zaduzenje.bookID;
     for(let i=0;i<this.knjige.length;i++){
-      if (bookID==this.knjige[i]._id) 
-        s=(this.knjige[i].author);
+      if (this.knjige[i]._id==bookID) return this.knjige[i].pic;
     }
-    return s;
-
+    
+    
   }
 
   razduzi(b:Borrowing){

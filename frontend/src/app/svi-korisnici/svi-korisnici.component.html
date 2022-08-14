@@ -1,0 +1,47 @@
+<div *ngIf="ready">
+    
+    <table>
+        <tr>
+            <th>Korisnicko ime</th>
+            <th>Lozinka</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Adresa</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th>Tip korisnika</th>
+            
+        </tr>
+        <tr *ngFor="let u of users">
+            <td *ngIf="!izmeni.get(u._id)">{{u.username}}</td>
+            <td *ngIf="izmeni.get(u._id)"><input value="{{u.username}}" type="text" [(ngModel)]="u.username">
+            </td>
+            <td *ngIf="!izmeni.get(u._id)">{{u.password}}</td>
+            <td *ngIf="izmeni.get(u._id)"><input value="{{u.password}}" type="text" [(ngModel)]="u.password">
+            </td>
+            <td *ngIf="!izmeni.get(u._id)">{{u.firstname}}</td>
+            <td *ngIf="izmeni.get(u._id)"><input value="{{u.firstname}}" type="text" [(ngModel)]="u.firstname">
+            </td>
+            <td *ngIf="!izmeni.get(u._id)">{{u.lastname}}</td>
+            <td *ngIf="izmeni.get(u._id)"><input value="{{u.lastname}}" type="text" [(ngModel)]="u.lastname">
+            </td>
+            <td *ngIf="!izmeni.get(u._id)">{{u.address}}</td>
+            <td *ngIf="izmeni.get(u._id)"><input value="{{u.address}}" type="text" [(ngModel)]="u.address">
+            </td>
+            <td *ngIf="!izmeni.get(u._id)">{{u.phone}}</td>
+            <td *ngIf="izmeni.get(u._id)"><input value="{{u.phone}}" type="text" [(ngModel)]="u.phone">
+            </td>
+            <td *ngIf="!izmeni.get(u._id)">{{u.email}}</td>
+            <td *ngIf="izmeni.get(u._id)"><input value="{{u.email}}" type="text" [(ngModel)]="u.email">
+            </td>
+            <td *ngIf="!izmeni.get(u._id)">{{u.type}}</td>
+            <td *ngIf="izmeni.get(u._id)"><input value="{{u.type}}" type="text" [(ngModel)]="u.type">
+            </td>
+            <td *ngIf="!izmeni.get(u._id)"><button  (click)="izmeniF(u._id)">Izmeni</button></td>
+            <td *ngIf="izmeni.get(u._id)"><button  (click)="sacuvaj(u._id)">Sacuvaj izmene</button></td>
+            <td *ngIf="!izmeni.get(u._id)"><button [disabled]="izmeni.get(u._id)" (click)="obrisi(u._id)">Obrisi</button></td>
+            <td *ngIf="izmeni.get(u._id)"><button *ngIf="izmeni.get(u._id)" (click)="nazad(u._id)">Nazad</button></td>
+        </tr>
+    </table>
+   
+</div>

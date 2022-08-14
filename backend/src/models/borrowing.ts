@@ -21,6 +21,9 @@ let Borrowing = new Schema({
     },
     bookID:{
         type:ObjectId
+    },
+    author:{
+        type:Array
     }
 })
 

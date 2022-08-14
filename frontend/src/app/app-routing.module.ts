@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 import { AppComponent } from './app.component';
 import { DetaljiComponent } from './detalji/detalji.component';
 import { DodajKnjiguComponent } from './dodaj-knjigu/dodaj-knjigu.component';
@@ -9,6 +10,7 @@ import { PocetnaKorisnikComponent } from './pocetna-korisnik/pocetna-korisnik.co
 import { PocetnaComponent } from './pocetna/pocetna.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
+import { SviKorisniciComponent } from './svi-korisnici/svi-korisnici.component';
 import { ZaduzeneComponent } from './zaduzene/zaduzene.component';
 
 const routes: Routes = [
@@ -22,6 +24,8 @@ const routes: Routes = [
   {path:"zaduzene",component:ZaduzeneComponent},
   {path:"istorija",component:IstorijaComponent},
   {path:"dodajKnjigu",component:DodajKnjiguComponent},
+  {path:"admin",component:AdminComponent},
+  {path:"sviKorisnici",component:SviKorisniciComponent},
   {path:"**",component:PocetnaComponent}
 ];
 

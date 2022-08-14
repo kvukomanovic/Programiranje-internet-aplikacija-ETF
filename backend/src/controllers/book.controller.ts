@@ -58,6 +58,7 @@ export class BooksController{
      zaduzi=(req: express.Request, res: express.Response)=>{
         let username=req.body.username;
         let book=new BookModel(req.body.book);
+        let author=book.author;
 
         BookModel.updateOne({'_id':book._id},{$inc : {'issued': 1,'available':-1}},(err,resp)=>{
             if (err) console.log(err);
@@ -68,7 +69,8 @@ export class BooksController{
                     title:book.title,
                     date:new Date().toISOString().slice(0,10),
                     returned:null,
-                    bookID:new ObjectId(book._id)
+                    bookID:new ObjectId(book._id),
+                    author:author
                 }
                 let b=new BorrowingModel(borrow);
                 b.save((err,resp)=>{
@@ -97,8 +99,7 @@ export class BooksController{
             if (err) console.log(err)
             else res.json({'message':'ok'});
         })
-
-
+       
     }
     /*----------------------------------------------------- */
     razduzi=(req: express.Request, res: express.Response)=>{
@@ -114,5 +115,38 @@ export class BooksController{
             }
         })
     }
-     
+     /*----------------------------------------------------- */
+     addBook=(req: express.Request, res: express.Response)=>{
+        let newbook=new BookModel(req.body);
+        newbook.save((err,resp)=>{
+            if (err) console.log(err);
+            else res.json({"message":"ok"});
+        })        
+     }
+      /*----------------------------------------------------- */
+      editBook=(req: express.Request, res: express.Response)=>{
+        let book=new BookModel(req.body);
+        BookModel.replaceOne({'_id':book._id},book,(err,resp)=>{
+            if (err) console.log(err)
+            else res.json({"message":"ok"});
+        })
+        
+      }
+      /*----------------------------------------------------- */
+      deleteBook=(req: express.Request, res: express.Response)=>{
+        let book=new BookModel(req.body);
+        BookModel.deleteOne({'_id':book._id},(err,resp)=>{
+            if (err) console.log(err)
+            else res.json({"message":"ok"});
+        })
+        
+      }
+      /*------------------------------------------------------ */
+      notReturnedBorrowingForBook=(req: express.Request, res: express.Response)=>{
+        let _id=req.body._id;
+        BorrowingModel.findOne({'bookID':_id, 'returned':null},(err,resp)=>{
+            if (err) console.log(err)
+            else res.json(resp);
+        })
+      }
 }

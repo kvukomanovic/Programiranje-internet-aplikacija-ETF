@@ -1,6 +1,7 @@
 import express from 'express'
 import UserModel from '../models/user'
 import NewUserModel from '../models/new_user'
+import { ObjectId } from 'mongodb'
 
 export class UsersController{
     login = (req: express.Request, res: express.Response)=>{
@@ -18,7 +19,8 @@ export class UsersController{
                         if(err2) console.log(err2);
                         else if (resp2!=null) res.json({"message":"Email already taken! Please choose another."});
  /*email ok */          else {
-                                let user= new NewUserModel(req.body);
+                                let user= new UserModel(req.body);
+                                user._id=new ObjectId();
                                 user.save((err3,resp3)=>{
                                     if (err3) {
                                         console.log(err3);
@@ -38,5 +40,18 @@ export class UsersController{
         })
 
     }
-    
+    /*-------------------------------------------------- */
+    getAllUsers=(req: express.Request, res: express.Response)=>{
+        UserModel.find({},(err,resp)=>{
+            if (err) console.log(err)
+            else res.json(resp);
+        })
+    }
+    getUser=(req: express.Request, res: express.Response)=>{
+        let _id=req.body._id;
+        UserModel.findOne({'_id':_id},(err,resp)=>{
+            if (err) console.log(err)
+            else res.json(resp);
+        })
+    }
 }

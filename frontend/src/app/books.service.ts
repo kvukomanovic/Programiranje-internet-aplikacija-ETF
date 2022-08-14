@@ -68,4 +68,56 @@ export class BooksService {
     }
     return this.http.post(`${this.uri}/books/razduzi`,data)
   }
+  /*------------------------------------------------------------- */
+  addBook(title,author,genre,publisher,year,language,pic,available){
+    let g=[];
+      let a=[];
+      genre.forEach(genre=>{
+        if (genre!=null || genre!="")
+        g.push(genre);
+      })
+      author.forEach(author=>{
+        if (author!=null || author!="")
+        a.push(author);
+      })
+    let data={
+      title:title,
+      author:a,
+      genre:g,
+      publisher:publisher,
+      year:year,
+      language:language,
+      pic:pic,
+      available:available,
+      issued:0,
+      comments:[]
+    }
+    return this.http.post(`${this.uri}/books/addBook`,data)
+    
+  }
+   /*------------------------------------------------------------- */
+   editBook(book:Book){
+    let a=[];
+      for(let i=0;i<book.author.length;i++){
+        if (book.author[i]!="") a.push(book.author[i])
+      }
+      let g=[];
+      for(let i=0;i<book.genre.length;i++){
+        if (book.genre[i]!="") g.push(book.genre[i])
+      }
+      book.author=a;
+      book.genre=g;
+      return this.http.post(`${this.uri}/books/editBook`,book)
+   }
+   /*------------------------------------------------------------ */
+   deleteBook(book:Book){
+    return this.http.post(`${this.uri}/books/deleteBook`,book)
+   }
+   /*------------------------------------------------------------ */
+   notReturnedBorrowingForBook(id){
+    let data={
+      _id:id
+    }
+    return this.http.post(`${this.uri}/books/notReturnedBorrowingForBook`,data)
+   }
 }

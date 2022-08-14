@@ -24,6 +24,9 @@ let Borrowing = new Schema({
     },
     bookID: {
         type: mongodb_1.ObjectId
+    },
+    author: {
+        type: Array
     }
 });
 exports.default = mongoose_1.default.model("BorrowingrModel", Borrowing, 'borrowings');

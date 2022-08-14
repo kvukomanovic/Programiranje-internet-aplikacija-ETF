@@ -18,25 +18,18 @@ export class DetaljiComponent implements OnInit {
 
   ngOnInit(): void {
     this.book=JSON.parse(localStorage.getItem("book"));
-      this.user=JSON.parse(localStorage.getItem("user"));
+    this.user=JSON.parse(localStorage.getItem("user"));
+    if (this.user==null){ this.router.navigate(['']); return;}
+    if (this.book==null){ this.router.navigate(['pocetnaKorisnik']); return;}
+ 
     if (this.user!=null){
-           this.bookService.borrowings(this.user.username).subscribe((borrowings:Borrowing[])=>{
-                if (borrowings!=null) this.borrowings=borrowings;
-                let moze=true;
-                this.borrowings.forEach(borrow=>{
-                  if (borrow.returned==null) {
-                    this.nevracene.push(borrow);
-                    if (borrow.bookID==this.book._id) moze=false;
-                  }
-                })
-
-                this.prikaziDugme=(moze && this.book.available>0);
-                this.book.comments.sort((a,b) => -(new Date(a.timestamp).getTime()-new Date(b.timestamp).getTime()))
-           })
-   } 
-    
-    
+      this.ready=true;
+      if (this.user.type!="admin")
+        this.daLiMozeDaIznajmi();
+    } 
+    this.book.comments.sort((a,b) => -(new Date(a.timestamp).getTime()-new Date(b.timestamp).getTime()));
   }
+
   book:Book;
   user:User;
   rented:Book[];
@@ -46,10 +39,12 @@ export class DetaljiComponent implements OnInit {
   message:string;
   prosecnaOcena:number;
   imaKomentara:boolean;
-
+  ready:boolean=false;
   rating:number;
   comment:string;
   mozeDaKomentarise:boolean;
+  image_data;
+  image:any;
 
   zaduzi(){
     let rok;
@@ -102,7 +97,7 @@ export class DetaljiComponent implements OnInit {
   }
  /*----------------------------------------------------------------------- */
   mozeDaKomentariseF():boolean{
-    if (this.user==null) return false;
+    if (this.user==null || this.user.type=="admin") return false;
     let komentarisao=false;
     this.book.comments.forEach((c)=>{
       if (c.username==this.user.username) {
@@ -130,4 +125,67 @@ export class DetaljiComponent implements OnInit {
       this.ngOnInit();
     })
   }
+  /*---------------------------------------------------------------*/
+  izmeni(){
+    this.izmena=true;
+  }
+  sacuvaj(){
+    //...
+    if (this.image_data) this.book.pic=this.image_data;
+    this.bookService.editBook(this.book).subscribe((resp)=>{
+      if (resp["message"]=="ok")
+      this.bookService.getBook(this.book._id).subscribe((book:Book)=>{
+        this.book=book;
+        localStorage.setItem("book",JSON.stringify(this.book));
+      })
+    })
+    this.izmena=false;
+  }
+  izmena:boolean=false;
+  /*-------------------------------------------------------------- */
+  change(event){
+    let input = event.target;
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+      reader.readAsDataURL(input.files[0]);
+      reader.onloadend = (e) => {
+        this.image_data = reader.result;
+        this.image = reader.result;
+      }
+
+    }
+  }
+  /*-------------------------------------------------------------- */
+ 
+  daLiMozeDaIznajmi(){
+    this.bookService.borrowings(this.user.username).subscribe((borrowings:Borrowing[])=>{
+      if (borrowings!=null) this.borrowings=borrowings;
+      let moze=true;
+      this.borrowings.forEach(borrow=>{
+        if (borrow.returned==null) {
+          this.nevracene.push(borrow);
+          if (borrow.bookID==this.book._id) moze=false;
+        }
+      })
+
+      this.prikaziDugme=(moze && this.book.available>0);
+    })
+  }
+   /*-------------------------------------------------------------- */
+  obrisiKnjigu(){
+    let brisi=confirm("Da li ste sigurni da zelite da obrisete knjigu?");
+    if (brisi){
+      this.bookService.notReturnedBorrowingForBook(this.book._id).subscribe((borrowings:Borrowing[])=>{
+        if (borrowings){
+          alert("Postoji zaduzenje na ovu knjigu! Nije je moguce obrisati!");
+          return;
+        }else{
+          this.bookService.deleteBook(this.book).subscribe((resp)=>{
+            if (resp['message']=="ok") this.router.navigate(['search']);
+          })
+        }
+      })
+    }
+  }
+  /*--------------------------------------------------------------- */
 }

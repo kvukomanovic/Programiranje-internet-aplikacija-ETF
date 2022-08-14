@@ -17,7 +17,9 @@ import { IstorijaComponent } from './istorija/istorija.component';
 import { MatSortModule } from '@angular/material/sort'
 import { MatSort, Sort } from '@angular/material/sort'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DodajKnjiguComponent } from './dodaj-knjigu/dodaj-knjigu.component'
+import { DodajKnjiguComponent } from './dodaj-knjigu/dodaj-knjigu.component';
+import { AdminComponent } from './admin/admin.component';
+import { SviKorisniciComponent } from './svi-korisnici/svi-korisnici.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { DodajKnjiguComponent } from './dodaj-knjigu/dodaj-knjigu.component'
     ProfileComponent,
     ZaduzeneComponent,
     IstorijaComponent,
-    DodajKnjiguComponent
+    DodajKnjiguComponent,
+    AdminComponent,
+    SviKorisniciComponent
   ],
   imports: [
     BrowserModule,

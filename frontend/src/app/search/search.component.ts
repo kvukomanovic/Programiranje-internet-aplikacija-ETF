@@ -37,6 +37,7 @@ export class SearchComponent implements OnInit {
       })
   }
   detalji(b:Book){
+    if (this.user==null) return;
     localStorage.setItem("book",JSON.stringify(b));
     this.router.navigate(['detalji']);
   }

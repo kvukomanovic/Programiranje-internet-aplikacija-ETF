@@ -19,36 +19,25 @@ export class IstorijaComponent implements OnInit {
     this.zaduzivanja=[];
     this.knjige=[];
     this.user=JSON.parse(localStorage.getItem("user"));
+    if (this.user==null) { this.router.navigate(['']); return;}
+    if (this.user.type=="admin") {this.router.navigate(['pocetnaKorisnik']); return;}
     this.booksService.borrowings(this.user.username).subscribe((borrowings:Borrowing[])=>{
       if (borrowings!=null){
         this.zaduzivanja=borrowings;
-        this.zaduzivanja.forEach(borrow=>{
-          this.booksService.getBook(borrow.bookID).subscribe((book2:Book)=>{
-            this.knjige.push(book2);
-            borrow.author=book2.author;
-         })
-        })
-        this.zaduzivanja.sort((a,b)=>{
-          if (a.returned==null) return -1;
-          else if (b.returned==null) return 1;
-          return a.returned>b.returned? -1:1;
-        })
+        this.initialSort();
         this.ready=true;
       } 
     })
   }
-  authors(bookID:string):String[]{
-    let s=[];
-    for(let i=0;i<this.knjige.length;i++){
-      if (bookID==this.knjige[i]._id) 
-      {
-       s.push(this.knjige[i].author);
-       break;
-      }
-    }
-    return s;
-
+  /*--------------------------------------------------- */
+  initialSort(){
+    this.zaduzivanja.sort((a,b)=>{
+      if (a.returned==null) return -1;
+      else if (b.returned==null) return 1;
+      return a.returned>b.returned? -1:1;
+    })
   }
+  /*---------------------------------------------------- */
   detalji(borrow:Borrowing){
     for(let i=0;i<this.knjige.length;i++){
       if (this.knjige[i]._id==borrow.bookID){

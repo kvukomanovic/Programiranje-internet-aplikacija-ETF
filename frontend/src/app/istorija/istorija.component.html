@@ -10,7 +10,7 @@
     </tr>
     <tr *ngFor="let b of zaduzivanja">
         <td>{{b.title}}</td>
-        <td><span *ngFor="let a of authors(b.bookID)">{{a}} </span></td>
+        <td><span *ngFor="let a of b.author">{{a}} </span></td>
         <td>{{b.date}}</td>
         <td *ngIf="b.returned">{{b.returned}}</td>
         <td *ngIf="!b.returned">Nije vraceno</td>

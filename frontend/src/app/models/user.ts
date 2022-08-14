@@ -8,7 +8,7 @@ export class User{
     email:string;
     phone:string;
     address:string;
-    picture:string;
+    picture:Buffer;
     type:string;
     deadline:number;
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BooksService } from '../books.service';
 import { Book } from '../models/book';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-pocetna-korisnik',
@@ -9,9 +11,11 @@ import { Book } from '../models/book';
 })
 export class PocetnaKorisnikComponent implements OnInit {
 
-  constructor(private bookService:BooksService) { }
+  constructor(private bookService:BooksService,private router:Router) { }
 
   ngOnInit(): void {
+    let user:User=JSON.parse(localStorage.getItem("user"));
+    if (user==null) this.router.navigate(['']);
     this.bookService.getAllBooks().subscribe((books:Book[])=>{
       if (books!=null){
         this.books=books;

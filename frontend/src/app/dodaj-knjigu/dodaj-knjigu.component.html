@@ -1,48 +1,56 @@
 <h3>Dodaj novu knjigu:</h3>
 
 <div>
-
+<form  [noValidate]="false">
+   
     <table>
         <tr>
             <td>Naziv:</td>
-            <td><input type="text" [(ngModel)]="title"></td>
+            <td><input type="text" [(ngModel)]="title" required name="naziv"></td>
         </tr>
         <tr>
             <td>Autori:</td>
-            <td><input type="text" [(ngModel)]="author[0]"></td>
-            <td><input type="text" [(ngModel)]="author[1]"></td>
-            <td><input type="text" [(ngModel)]="author[2]"></td>
+            <td><input type="text" [(ngModel)]="author[0]"  name="autori" required></td>
+            <td><input type="text" [(ngModel)]="author[1]" name="autori"></td>
+            <td><input type="text" [(ngModel)]="author[2]" name="autori"></td>
         </tr>
         <tr>
             <td>Zanr:</td>
-            <td><input type="text" [(ngModel)]="genre[0]"></td>
-            <td><input type="text" [(ngModel)]="genre[1]"></td>
-            <td><input type="text" [(ngModel)]="genre[2]"></td>
+            <td><input type="text" [(ngModel)]="genre[0]" name="zanr" required ></td>
+            <td><input type="text" [(ngModel)]="genre[1]" name="zanr"></td>
+            <td><input type="text" [(ngModel)]="genre[2]" name="zanr"></td>
         </tr>
         <tr>
             <td>Izdavac:</td>
-            <td><input type="text" [(ngModel)]="publisher"></td>
+            <td><input type="text" [(ngModel)]="publisher" name="izdavac" required></td>
         </tr>
         <tr>
             <td>Godina izdavanja:</td>
-            <td><input type="text" [(ngModel)]="year"></td>
+            <td><input type="number" max="2022" [(ngModel)]="year"  name="godina" required></td>
         </tr>
         <tr>
             <td>Jezik:</td>
-            <td><input type="text" [(ngModel)]="language"></td>
+            <td><input type="text" [(ngModel)]="language" name="jezik" required></td>
+        </tr>
+        <tr>
+            <td>Broj knjiga:</td>
+            <td><input type="number" min="0" [(ngModel)]="available" name="available" required></td>
         </tr>
         <tr>
             <td>Slika:</td>
-            <td><input type="file" [(ngModel)]="picture" accept=".jpg,.png" (change)="change($event)">
-                <input class="btn-signup btn-plain btn-green btn-curved" type="submit" value="SignUp"></td>
         </tr>
         <tr>
-            <td><button (click)="submit()"> Submit</button></td>
+            <td><input type="file" name="slika" accept=".jpg,.png" (change)="change($event)">
+                <div class="selected-image no-border" *ngIf="image!=null"><img style="max-width: 100px; max-height: 100px;" src="{{image}}" /></div>
+            </td>
         </tr>
+        
+       
     </table>
+    <button (click)="dodajKnjigu()">Dodaj knjigu</button>
 
 
-
+</form>
 
 
 

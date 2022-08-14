@@ -70,6 +70,7 @@ class BooksController {
         this.zaduzi = (req, res) => {
             let username = req.body.username;
             let book = new book_1.default(req.body.book);
+            let author = book.author;
             book_1.default.updateOne({ '_id': book._id }, { $inc: { 'issued': 1, 'available': -1 } }, (err, resp) => {
                 if (err)
                     console.log(err);
@@ -80,7 +81,8 @@ class BooksController {
                         title: book.title,
                         date: new Date().toISOString().slice(0, 10),
                         returned: null,
-                        bookID: new mongodb_1.ObjectId(book._id)
+                        bookID: new mongodb_1.ObjectId(book._id),
+                        author: author
                     };
                     let b = new borrowing_1.default(borrow);
                     b.save((err, resp) => {
@@ -127,6 +129,46 @@ class BooksController {
                             res.json({ 'message': "ok" });
                     });
                 }
+            });
+        };
+        /*----------------------------------------------------- */
+        this.addBook = (req, res) => {
+            let newbook = new book_1.default(req.body);
+            newbook.save((err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ "message": "ok" });
+            });
+        };
+        /*----------------------------------------------------- */
+        this.editBook = (req, res) => {
+            let book = new book_1.default(req.body);
+            book_1.default.replaceOne({ '_id': book._id }, book, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ "message": "ok" });
+            });
+        };
+        /*----------------------------------------------------- */
+        this.deleteBook = (req, res) => {
+            let book = new book_1.default(req.body);
+            book_1.default.deleteOne({ '_id': book._id }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ "message": "ok" });
+            });
+        };
+        /*------------------------------------------------------ */
+        this.notReturnedBorrowingForBook = (req, res) => {
+            let _id = req.body._id;
+            borrowing_1.default.findOne({ 'bookID': _id, 'returned': null }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(resp);
             });
         };
     }
