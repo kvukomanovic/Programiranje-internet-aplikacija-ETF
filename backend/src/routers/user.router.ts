@@ -18,4 +18,19 @@ usersRouter.route('/getAllUsers').get(
 usersRouter.route('/getUser').post(
     (req, res)=>new UsersController().getUser(req, res)
 )
+usersRouter.route('/editUser').post(
+    (req, res)=>new UsersController().editUser(req, res)
+)
+usersRouter.route('/addUser').post(
+    (req, res)=>new UsersController().addUser(req, res)
+)
+usersRouter.route('/deleteUser').post(
+    (req, res)=>new UsersController().deleteUser(req, res)
+)
+usersRouter.route('/getRequests').get(
+    (req, res)=>new UsersController().getRequests(req, res)
+)
+usersRouter.route('/denyRequest').post(
+    (req, res)=>new UsersController().denyRequest(req, res)
+)
 export default usersRouter;

@@ -44,7 +44,7 @@ export class DodajKnjiguComponent implements OnInit {
     }
     if (this.available<0){
       this.correctInput=false;
-      message+="Godina izdavanja ne moze biti u proslosti!\n";
+      message+="Morate uneti pozitivan broj kopija!\n";
     }
     if(this.image_data==null) {
       this.correctInput=false;

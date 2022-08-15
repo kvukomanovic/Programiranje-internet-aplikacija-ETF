@@ -1,5 +1,5 @@
 <div *ngIf="ready">
-    
+    <h3>Svi korisnici u sistemu</h3>
     <table>
         <tr>
             <th>Korisnicko ime</th>
@@ -34,14 +34,59 @@
             <td *ngIf="!izmeni.get(u._id)">{{u.email}}</td>
             <td *ngIf="izmeni.get(u._id)"><input value="{{u.email}}" type="text" [(ngModel)]="u.email">
             </td>
-            <td *ngIf="!izmeni.get(u._id)">{{u.type}}</td>
-            <td *ngIf="izmeni.get(u._id)"><input value="{{u.type}}" type="text" [(ngModel)]="u.type">
+            <td *ngIf="!izmeni.get(u._id) || u._id==user._id">{{u.type}}</td>
+            <td *ngIf="izmeni.get(u._id) && u._id!=user._id"><input value="{{u.type}}" type="text" [(ngModel)]="u.type">
             </td>
             <td *ngIf="!izmeni.get(u._id)"><button  (click)="izmeniF(u._id)">Izmeni</button></td>
             <td *ngIf="izmeni.get(u._id)"><button  (click)="sacuvaj(u._id)">Sacuvaj izmene</button></td>
             <td *ngIf="!izmeni.get(u._id)"><button [disabled]="izmeni.get(u._id)" (click)="obrisi(u._id)">Obrisi</button></td>
             <td *ngIf="izmeni.get(u._id)"><button *ngIf="izmeni.get(u._id)" (click)="nazad(u._id)">Nazad</button></td>
         </tr>
+        <tr>
+            <td><input type="text" [(ngModel)]="usernameFromForm"></td>
+            <td><input type="text" [(ngModel)]="passwordFromForm"></td>
+            <td><input type="text" [(ngModel)]="firstnameFromForm"></td>
+            <td><input type="text" [(ngModel)]="lastnameFromForm"></td>
+            <td><input type="text" [(ngModel)]="addressFromForm"></td>
+            <td><input type="text" [(ngModel)]="phoneFromForm"></td>
+            <td><input type="text" [(ngModel)]="emailFromForm"></td>
+            <td> <input type="text" [(ngModel)]="typeFromForm"></td>
+            <td><input type="file" accept=".jpg,.png" (change)="change($event)"></td>
+            <td><button (click)="dodajKorisnika()">Dodaj korisnika</button></td>
+
+        </tr>
     </table>
-   
+    <br><br><br>
+    <h3>Zahtevi za registraciju</h3>
+    <table *ngIf="zahtevi!=null && zahtevi.length>0">
+        <tr>
+            <th>Korisnicko ime</th>
+            <th>Lozinka</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Adresa</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th>Slika</th>
+            <th>Tip korisnika</th>
+        </tr>
+        <tr *ngFor="let z of zahtevi">
+            <td>{{z.username}}</td>
+            <td>{{z.password}}</td>
+            <td>{{z.firstname}}</td>
+            <td>{{z.lastname}}</td>
+            <td>{{z.address}}</td>
+            <td>{{z.phone}}</td>
+            <td>{{z.email}}</td>
+            <td><img src="{{z.picture}}" style="max-height: 50px;"></td>
+            <td>{{z.type}}</td>
+            <td><button (click)="prihvati(z._id)">Prihvati</button></td>
+            <td><button (click)="odbij(z._id)">Odbij</button></td>
+
+        </tr>
+    </table>
+    <span *ngIf="zahtevi!=null && zahtevi.length==0" style="color: orange; font-style: oblique; font-weight: bolder;">Nema zahteva za registraciju.</span>
+    <br><br>
+    <h3>Promenite broj dana na koliko se zaduzuje knjiga:</h3>
+    <input type="number" value="user.deadline" [(ngModel)]="user.deadline"><button (click)="saveDeadline()">Sacuvaj</button>
 </div>

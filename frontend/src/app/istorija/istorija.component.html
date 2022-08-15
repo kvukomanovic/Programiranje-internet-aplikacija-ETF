@@ -1,6 +1,6 @@
 <div *ngIf="ready">
-
- <table matSort (matSortChange)="sortData($event)">
+    <span *ngIf="(zaduzivanja==null || zaduzivanja.length==0)"><h3 style="color:rgb(203, 124, 45)">Nemate prethodnih zaduzivanja.</h3></span>
+ <table matSort (matSortChange)="sortData($event)" *ngIf="!(zaduzivanja==null || zaduzivanja.length==0)">
     <tr>
         <th mat-sort-header="naziv"> Naziv</th>
         <th mat-sort-header="autori">Autori</th>

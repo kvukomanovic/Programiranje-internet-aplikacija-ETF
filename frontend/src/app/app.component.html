@@ -1,4 +1,6 @@
+<div class="page">
 <div> <h1>Dobrodosli u biblioteku!</h1></div>
+<div>
 <hr>
 <menu>
     <li ><button (click)="pocetna()">Pocetna strana</button></li>
@@ -11,7 +13,12 @@
     <li *ngIf="user!=null && user.type=='admin' "><button routerLink="sviKorisnici">Svi korisnici</button></li>
     <li *ngIf="user!=null"><button (click)="logout()" routerLink="">Odjava</button></li>
   </menu>
+</div>
+<div>
 <router-outlet ></router-outlet>
+</div>
+<div>
 <footer>
     @ Copyright 2022 Elektrotehnicki fakultet
-</footer>
+</footer></div>
+</div>

@@ -14,10 +14,7 @@ menu, ul {
 button {
     width: 100%;
 }
-.footer{
-  position:fixed;
-  
-}
+
 #profilepic{
   max-height: 35px;
   max-width: 35px;
@@ -30,10 +27,19 @@ li {
 }
 button{
   height: 40px;
-  background-color:azure;
+  background-color:rgba(255, 196, 107, 0.533);
+  border-radius: 2%;
   font-weight: bold;
   text-align: center;
 }
 menu{
   width: 100%;
+}
+
+.footer{
+  position:fixed;
+  bottom: 0;
+  left:0;
+  width: 100%;
+  text-align: center;
 }
