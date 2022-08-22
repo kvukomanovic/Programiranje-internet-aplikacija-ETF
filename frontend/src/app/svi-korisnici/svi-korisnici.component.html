@@ -12,7 +12,7 @@
             <th>Tip korisnika</th>
             
         </tr>
-        <tr *ngFor="let u of users">
+        <tr *ngFor="let u of users" id="users">
             <td *ngIf="!izmeni.get(u._id)">{{u.username}}</td>
             <td *ngIf="izmeni.get(u._id)"><input value="{{u.username}}" type="text" [(ngModel)]="u.username">
             </td>
@@ -39,10 +39,12 @@
             </td>
             <td *ngIf="!izmeni.get(u._id)"><button  (click)="izmeniF(u._id)">Izmeni</button></td>
             <td *ngIf="izmeni.get(u._id)"><button  (click)="sacuvaj(u._id)">Sacuvaj izmene</button></td>
-            <td *ngIf="!izmeni.get(u._id)"><button [disabled]="izmeni.get(u._id)" (click)="obrisi(u._id)">Obrisi</button></td>
+            <td *ngIf="!izmeni.get(u._id)"><button [disabled]="izmeni.get(u._id) || u.type=='admin'" (click)="obrisi(u._id)">Obrisi</button></td>
             <td *ngIf="izmeni.get(u._id)"><button *ngIf="izmeni.get(u._id)" (click)="nazad(u._id)">Nazad</button></td>
+            <td *ngIf="!u.blocked && u.type!='admin'"><button (click)="block(u)">Blokiraj</button></td>
+            <td *ngIf="u.blocked && u.type!='admin'"><button (click)="unblock(u)">Odblokiraj</button></td>
         </tr>
-        <tr>
+        <tr id="addUser">
             <td><input type="text" [(ngModel)]="usernameFromForm"></td>
             <td><input type="text" [(ngModel)]="passwordFromForm"></td>
             <td><input type="text" [(ngModel)]="firstnameFromForm"></td>
@@ -56,7 +58,7 @@
 
         </tr>
     </table>
-    <br><br><br>
+    <hr>
     <h3>Zahtevi za registraciju</h3>
     <table *ngIf="zahtevi!=null && zahtevi.length>0">
         <tr>
@@ -85,8 +87,11 @@
 
         </tr>
     </table>
-    <span *ngIf="zahtevi!=null && zahtevi.length==0" style="color: orange; font-style: oblique; font-weight: bolder;">Nema zahteva za registraciju.</span>
-    <br><br>
+    <span *ngIf="zahtevi!=null && zahtevi.length==0" 
+        style="color: orange; font-style: oblique; font-weight: bolder; padding-left: 15px;">Nema zahteva za registraciju.</span>
+    
+    <hr>
     <h3>Promenite broj dana na koliko se zaduzuje knjiga:</h3>
-    <input type="number" value="user.deadline" [(ngModel)]="user.deadline"><button (click)="saveDeadline()">Sacuvaj</button>
+    <input type="number" value="user.deadline" [(ngModel)]="user.deadline" style="width: 50px;height: 20px;padding-left: 25px;margin-left: 20px;">
+    <button (click)="saveDeadline()" style="margin-left: 10px;">Sacuvaj</button>
 </div>

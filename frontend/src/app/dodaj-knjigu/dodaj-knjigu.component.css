@@ -1,0 +1,48 @@
+input{
+    width: 150px;
+}
+table{
+    margin-left: 15px;
+    border: 5px solid rgb(213, 200, 183);
+    border-radius: 15px;
+    padding-bottom: 5px;
+}
+@media screen and (max-width:800px) {
+    input{
+        width: 70px;
+    }
+    table{
+        margin-left: 5px;
+        border: 5px solid rgb(213, 200, 183);
+        border-radius: 15px;
+        padding-bottom: 5px;
+    }
+    #file{
+        width: auto;
+    }
+}
+
+button{
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 150px;
+    padding: 5px;
+    background-color: rgb(244, 206, 181);
+    color: rgb(119, 103, 93);
+    font-size: 10pt;
+    border-radius: 5px;
+    
+}
+td{
+    padding: 10px 0 0 0;
+    
+}
+img{
+    border: 5px solid rgb(226, 220, 213);
+    border-radius: 5px;
+}
+h3{
+    color: rgb(103, 88, 88);
+    margin-left: 15px;
+}

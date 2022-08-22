@@ -1,0 +1,21 @@
+table, tr, td,th{
+    border: 1px solid rgb(144, 116, 116);
+}
+th{
+    padding: 5px;
+    background-color: antiquewhite;
+}
+td{
+    padding: 5px;
+}
+h3{
+    padding-left: 15px;
+    padding-top: 10px;
+    color: rgb(133, 98, 98);
+}
+table{
+    margin-left: 20px;
+}
+#s{
+    margin-left: 25px;
+}

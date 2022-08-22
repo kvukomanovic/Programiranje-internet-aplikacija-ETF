@@ -24,6 +24,9 @@ let Borrowing = new Schema({
     },
     author:{
         type:Array
+    },
+    prolonged:{
+        type:Boolean
     }
 })
 

@@ -21,6 +21,8 @@ export class UsersController{
  /*email ok */          else {
                                 let user= new NewUserModel(req.body);
                                 user._id=new ObjectId();
+                                user.blocked=false;
+                                user.notifications=[];
                                 user.save((err3,resp3)=>{
                                     if (err3) {
                                         console.log(err3);
@@ -75,6 +77,8 @@ export class UsersController{
     addUser=(req: express.Request, res: express.Response)=>{
         let user=new UserModel(req.body);
         user._id=new ObjectId();
+        user.blocked=false;
+        user.notifications=[];
         UserModel.findOne({'username':user.username},(err,resp)=>{
             if (err) console.log(err)
             else if (resp) res.json({"message":"Korisnicko ime je zauzeto!\n"});
@@ -111,6 +115,30 @@ export class UsersController{
         NewUserModel.deleteOne({'_id':_id},(err,resp)=>{
             if (err) console.log(err)
             else res.json({"message":"ok"});
+        })
+    }
+    /*------------------------------------------------------- */
+    block=(req: express.Request, res: express.Response)=>{
+        let _id=req.body._id;
+        UserModel.updateOne({'_id':_id},{$set: {'blocked':true}},(err,resp)=>{
+            if (err) console.log(err)
+            else res.json({"message":"ok"});
+        })
+    }
+    /*------------------------------------------------------- */
+    unblock=(req: express.Request, res: express.Response)=>{
+        let _id=req.body._id;
+        UserModel.updateOne({'_id':_id},{$set:{'blocked':false}},(err,resp)=>{
+            if (err) console.log(err)
+            else res.json({"message":"ok"});
+        })
+    }
+    /*------------------------------------------------------- */
+    deleteResNotif=(req: express.Request, res: express.Response)=>{
+        let username=req.body.username;
+        UserModel.updateOne({'username':username},{$pull:{'notifications':new RegExp("Ostvarena vam je rezervacija")}},(err,resp)=>{
+            if (err) console.log(err);
+            else res.json({'message':"ok"})
         })
     }
 }

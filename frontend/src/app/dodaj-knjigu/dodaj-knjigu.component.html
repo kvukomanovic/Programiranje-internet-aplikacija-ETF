@@ -37,11 +37,8 @@
             <td><input type="number" min="0" [(ngModel)]="available" name="available" required></td>
         </tr>
         <tr>
-            <td>Slika:</td>
-        </tr>
-        <tr>
-            <td><input type="file" name="slika" accept=".jpg,.png" (change)="change($event)">
-                <div class="selected-image no-border" *ngIf="image!=null"><img style="max-width: 100px; max-height: 100px;" src="{{image}}" /></div>
+            <td colspan="4"><div class="selected-image no-border" *ngIf="image_data!=null"><img style="max-width: 100px; max-height: 100px;" src="{{image_data}}" /></div>
+                Slika:   <input id="file" type="file" name="slika" accept=".jpg,.png" (change)="change($event)">
             </td>
         </tr>
         

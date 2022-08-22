@@ -8,13 +8,14 @@ import { IstorijaComponent } from './istorija/istorija.component';
 import { LogiComponent } from './logi/logi.component';
 import { PocetnaKorisnikComponent } from './pocetna-korisnik/pocetna-korisnik.component';
 import { PocetnaComponent } from './pocetna/pocetna.component';
+import { PregledZahtevaZaKnjigomComponent } from './pregled-zahteva-za-knjigom/pregled-zahteva-za-knjigom.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { SviKorisniciComponent } from './svi-korisnici/svi-korisnici.component';
 import { ZaduzeneComponent } from './zaduzene/zaduzene.component';
+import { ZahtevZaKnjiguComponent } from './zahtev-za-knjigu/zahtev-za-knjigu.component';
 
 const routes: Routes = [
-  {path:"app",component:AppComponent},
   {path:"",component:PocetnaComponent},
   {path:"login",component:LogiComponent},
   {path:"search",component:SearchComponent},
@@ -26,6 +27,8 @@ const routes: Routes = [
   {path:"dodajKnjigu",component:DodajKnjiguComponent},
   {path:"admin",component:AdminComponent},
   {path:"sviKorisnici",component:SviKorisniciComponent},
+  {path:"zahtevZaKnjigu",component:ZahtevZaKnjiguComponent},
+  {path:"pregledZahtevaZaKnjigu",component:PregledZahtevaZaKnjigomComponent},
   {path:"**",component:PocetnaComponent}
 ];
 

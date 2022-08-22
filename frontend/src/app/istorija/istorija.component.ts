@@ -39,13 +39,12 @@ export class IstorijaComponent implements OnInit {
   }
   /*---------------------------------------------------- */
   detalji(borrow:Borrowing){
-    for(let i=0;i<this.knjige.length;i++){
-      if (this.knjige[i]._id==borrow.bookID){
-        localStorage.setItem("book",JSON.stringify(this.knjige[i]));
-        break;
-      }
-    }
-    this.router.navigate(['detalji']);
+    if (this.user.blocked) return;
+    this.booksService.getBook(borrow.bookID).subscribe((book:Book)=>{
+      localStorage.setItem("book",JSON.stringify(book));
+      this.router.navigate(['detalji']);
+    })
+    
   }
   sortData(sort: Sort) {    
     if (!sort.active || sort.direction === '') {  

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BooksService } from '../books.service';
 import { Book } from '../models/book';
 import { Borrowing } from '../models/borrowing';
+import { Reservation } from '../models/reservation';
 import { User } from '../models/user';
 import { UserService } from '../user.service';
 
@@ -40,6 +41,10 @@ export class ZaduzeneComponent implements OnInit {
 
       }
     })
+    /*let regex=new RegExp("Ostvarena vam je rezervacija");
+    for(let i=0;i<this.user.notifications.length;i++)
+    if (regex.test(this.user.notifications[i])) */
+    this.userService.deleteResNotif(this.user.username).subscribe(()=>{});
 
   }
   pic(zaduzenje:Borrowing):any{
@@ -53,7 +58,12 @@ export class ZaduzeneComponent implements OnInit {
 
   razduzi(b:Borrowing){
     this.booksService.razduzi(b).subscribe((resp)=>{
-      if (resp["message"]=="ok") this.ngOnInit();
+      if (resp["message"]=="ok"){
+        let i;
+        for(i=0;i<this.knjige.length;i++)
+          if (this.knjige[i]._id==b.bookID) break;
+        this.srediRezervacije(this.knjige[i],0);
+      }
     })
   }
   dana(b:Borrowing):number{
@@ -64,9 +74,22 @@ export class ZaduzeneComponent implements OnInit {
     return dana;  
    
   }
+  produzi(b:Borrowing){
+    this.booksService.prolong(b._id).subscribe((resp)=>{
+      this.ngOnInit();
+    })
+  }
   user:User;
   ready:boolean=false;
   zaduzenja:Borrowing[]=new Array();
   knjige:Book[]=new Array();
   rok:number;
+
+  srediRezervacije(b:Book,i:number){
+    this.booksService.srediRez(b,i).subscribe((resp)=>{
+        if (resp['message']=="ok" || resp['message']=="nothing to do") this.ngOnInit();
+        else this.srediRezervacije(b,i+1);
+    })
+  }
+  
 }

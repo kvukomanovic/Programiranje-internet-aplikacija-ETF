@@ -32,6 +32,8 @@ class UsersController {
                         /*email ok */ else {
                             let user = new new_user_1.default(req.body);
                             user._id = new mongodb_1.ObjectId();
+                            user.blocked = false;
+                            user.notifications = [];
                             user.save((err3, resp3) => {
                                 if (err3) {
                                     console.log(err3);
@@ -99,6 +101,8 @@ class UsersController {
         this.addUser = (req, res) => {
             let user = new user_1.default(req.body);
             user._id = new mongodb_1.ObjectId();
+            user.blocked = false;
+            user.notifications = [];
             user_1.default.findOne({ 'username': user.username }, (err, resp) => {
                 if (err)
                     console.log(err);
@@ -148,6 +152,36 @@ class UsersController {
                     console.log(err);
                 else
                     res.json({ "message": "ok" });
+            });
+        };
+        /*------------------------------------------------------- */
+        this.block = (req, res) => {
+            let _id = req.body._id;
+            user_1.default.updateOne({ '_id': _id }, { $set: { 'blocked': true } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ "message": "ok" });
+            });
+        };
+        /*------------------------------------------------------- */
+        this.unblock = (req, res) => {
+            let _id = req.body._id;
+            user_1.default.updateOne({ '_id': _id }, { $set: { 'blocked': false } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ "message": "ok" });
+            });
+        };
+        /*------------------------------------------------------- */
+        this.deleteResNotif = (req, res) => {
+            let username = req.body.username;
+            user_1.default.updateOne({ 'username': username }, { $pull: { 'notifications': new RegExp("Ostvarena vam je rezervacija") } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ 'message': "ok" });
             });
         };
     }

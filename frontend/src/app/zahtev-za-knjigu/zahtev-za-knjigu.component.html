@@ -1,0 +1,58 @@
+<h3>Posaljite zahtev za dodavanje nove knjige:</h3>
+
+<div>
+<form  [noValidate]="false">
+   
+    <table>
+        <tr>
+            <td>Naziv:</td>
+            <td><input type="text" [(ngModel)]="title" required name="naziv"></td>
+        </tr>
+        <tr>
+            <td>Autori:</td>
+            <td><input type="text" [(ngModel)]="author[0]"  name="autori" required></td>
+            <td><input type="text" [(ngModel)]="author[1]" name="autori"></td>
+            <td><input type="text" [(ngModel)]="author[2]" name="autori"></td>
+        </tr>
+        <tr>
+            <td>Zanr:</td>
+            <td><input type="text" [(ngModel)]="genre[0]" name="zanr" required ></td>
+            <td><input type="text" [(ngModel)]="genre[1]" name="zanr"></td>
+            <td><input type="text" [(ngModel)]="genre[2]" name="zanr"></td>
+        </tr>
+        <tr>
+            <td>Izdavac:</td>
+            <td><input type="text" [(ngModel)]="publisher" name="izdavac" required></td>
+        </tr>
+        <tr>
+            <td>Godina izdavanja:</td>
+            <td><input type="number" max="2022" [(ngModel)]="year"  name="godina" required></td>
+        </tr>
+        <tr>
+            <td>Jezik:</td>
+            <td><input type="text" [(ngModel)]="language" name="jezik" required></td>
+        </tr>
+        
+        <tr>
+            <td>Slika:</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div class="selected-image no-border" *ngIf="image!=null"><img style="max-width: 100px; max-height: 100px;" src="{{image}}" /></div>
+                <input  id="i" type="file" name="slika" accept=".jpg,.png" (change)="change($event)">
+            </td>
+        </tr>
+        
+       
+    </table>
+    <button (click)="dodajKnjigu()">Posalji zahtev</button>
+
+
+</form>
+
+
+
+
+
+
+</div>

@@ -1,5 +1,5 @@
 <h2>Pretrazite biblioteku:</h2>
-<table>
+<table id="table1">
     <tr>
         <td>Naziv:</td>
         <td><input type="text" name="title" [(ngModel)]="title"></td>
@@ -8,12 +8,31 @@
         <td>Autor:</td>
         <td><input type="text" name="author" [(ngModel)]="author"></td>
     </tr>
+</table>
+
+    <span id="napredna">Napredna pretraga:</span>
+<table id="table2">
     <tr>
+        <td>Zanr:</td>
         <td>
-            <button (click)="search()">Pretrazi</button>
+            <select multiple [(ngModel)]="selectedGenre">
+                <option *ngFor="let g of genre" ngValue="{{g}}">{{g}}</option>
+            </select>
         </td>
     </tr>
+    <tr>
+        <td>Godina izdavanja:</td>
+        <td>
+            <input type="number" min="0" max="2022" [(ngModel)]="minYear">
+            <input type="number" min="0" max="2022" [(ngModel)]="maxYear">
+        </td>
+    </tr>
+    <tr>
+        <td>Izdavac:</td>
+        <td><input type="text" [(ngModel)]="publisher"></td>
+    </tr>
 </table>
+<button (click)="search()" id="button">Pretrazi</button>
 
 <hr>
 <form *ngIf="searched" name="searched">

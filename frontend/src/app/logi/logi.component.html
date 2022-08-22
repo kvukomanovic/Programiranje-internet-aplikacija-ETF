@@ -18,7 +18,7 @@
 <hr>
 <h3>Registracija</h3>
 <form>
-<table>
+<table id="register">
     <tr>
         <td>Korisnicko ime:</td>
         <td><input type="text" [(ngModel)]="usernameR" name="uR"></td>
@@ -61,5 +61,5 @@
     </tr>
 
 </table>
-    <button type="submit" (click)="register()">Registruj se</button>
+    <button type="submit" (click)="register()" style="margin:5px 0 0 15px">Registruj se</button>
 </form>

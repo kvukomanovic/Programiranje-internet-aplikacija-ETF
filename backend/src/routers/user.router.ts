@@ -30,7 +30,16 @@ usersRouter.route('/deleteUser').post(
 usersRouter.route('/getRequests').get(
     (req, res)=>new UsersController().getRequests(req, res)
 )
+usersRouter.route('/block').post(
+    (req, res)=>new UsersController().block(req, res)
+)
+usersRouter.route('/unblock').post(
+    (req, res)=>new UsersController().unblock(req, res)
+)
 usersRouter.route('/denyRequest').post(
     (req, res)=>new UsersController().denyRequest(req, res)
+)
+usersRouter.route('/deleteResNotif').post(
+    (req, res)=>new UsersController().deleteResNotif(req, res)
 )
 export default usersRouter;

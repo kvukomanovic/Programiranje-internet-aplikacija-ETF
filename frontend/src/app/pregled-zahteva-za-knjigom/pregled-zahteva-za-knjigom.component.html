@@ -1,0 +1,26 @@
+<h3>Zahtevi za dodavanjem novih knjiga:</h3>
+<span id="s" *ngIf="zahtevi!=null && zahtevi.length==0" style="color:orange; font-style: oblique; font-weight: bolder;">Nema novih zahteva.</span>
+<table *ngIf="zahtevi!=null && zahtevi.length>0">
+    <tr>
+        <th>Korisnik</th>
+        <th>Naziv</th>
+        <th>Autor</th>
+        <th>Zanr</th>
+        <th>Izdavac</th>
+        <th>Godina izdavanja</th>
+        <th>Jezik</th>
+        <th>Korice</th>
+    </tr>
+    <tr *ngFor="let b of zahtevi">
+        <td>{{b.username}}</td>
+        <td>{{b.title}}</td>
+        <td><ul><li *ngFor="let a of b.author">{{a}}</li></ul></td>
+        <td><ul><li *ngFor="let z of b.genre">{{z}}</li></ul></td>
+        <td>{{b.publisher}}</td>
+        <td>{{b.year}}</td>
+        <td>{{b.language}}</td>
+        <td><img src='{{b.pic}}' style="max-height: 150px; max-width: 100px;"></td>
+        <td><button (click)="dodaj(b)">Dodaj knjigu</button></td>
+        <td><button (click)="obrisi(b)">Obrisi</button></td>
+    </tr>
+</table>

@@ -76,4 +76,20 @@ export class UserService {
     return this.http.post(`${this.uri}/users/denyRequest`,data)
 
   }
+  /*--------------------------------------------------- */
+  block(id){
+    let data={_id:id}
+    return this.http.post(`${this.uri}/users/block`,data)
+
+  }
+  /*--------------------------------------------------- */
+  unblock(id){
+    let data={_id:id}
+    return this.http.post(`${this.uri}/users/unblock`,data)
+
+  }
+  deleteResNotif(username){
+    let data={username:username}
+    return this.http.post(`${this.uri}/users/deleteResNotif`,data)
+  }
 }

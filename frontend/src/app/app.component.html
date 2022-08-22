@@ -1,24 +1,33 @@
+<!--<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>-->
 <div class="page">
-<div> <h1>Dobrodosli u biblioteku!</h1></div>
+<div id="header"> <div id="headerText"><h1>Dobrodosli u biblioteku!</h1></div></div>
 <div>
 <hr>
 <menu>
     <li ><button (click)="pocetna()">Pocetna strana</button></li>
-    <li *ngIf="user==null"><button (click)="listen()"><a routerLink="login">Prijava/Registracija</a></button></li>
-    <li><button><a routerLink="search">Pretraga biblioteke</a></button></li>
-    <li *ngIf="user!=null"><button routerLink="profile">Moj profil<img id="profilepic" src="{{user.picture}}"></button></li>
+    <li *ngIf="user==null"><button (click)="listen()" routerLink="login">Prijava/Registracija</button></li>
+    <li><button routerLink="search">Pretraga biblioteke</button></li>
+    <li *ngIf="user!=null"><button routerLink="profile"><img id="profilepic" src="{{user.picture}}"></button></li>
     <li *ngIf="user!=null && user.type!='admin'"><button routerLink="zaduzene">Pregled zaduzenih knjiga</button></li>
     <li *ngIf="user!=null && user.type!='admin'"><button routerLink="istorija">Istorija zaduzivanja</button></li>
-    <li *ngIf="user!=null && user.type!='citalac' "><button routerLink="dodajKnjigu">Dodaj knjigu</button></li>
+    <li *ngIf="user!=null && user.type!='citalac'&& user.blocked==false "><button routerLink="dodajKnjigu">Dodaj knjigu</button></li>
+    <li *ngIf="user!=null && user.type=='citalac' && user.blocked==false"><button routerLink="zahtevZaKnjigu">Zahtev za knjigom</button></li>
+    <li *ngIf="user!=null && user.type=='moderator'&& user.blocked==false "><button routerLink="pregledZahtevaZaKnjigu">Zahtevi za knjigom</button></li>
     <li *ngIf="user!=null && user.type=='admin' "><button routerLink="sviKorisnici">Svi korisnici</button></li>
     <li *ngIf="user!=null"><button (click)="logout()" routerLink="">Odjava</button></li>
+
   </menu>
 </div>
 <div>
 <router-outlet ></router-outlet>
 </div>
-<div>
-<footer>
+<div id="divv">
+<div id="footer">
+  
     @ Copyright 2022 Elektrotehnicki fakultet
-</footer></div>
+  
+</div>
+</div>
 </div>

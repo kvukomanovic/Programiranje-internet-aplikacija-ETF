@@ -19,7 +19,10 @@ import { MatSort, Sort } from '@angular/material/sort'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DodajKnjiguComponent } from './dodaj-knjigu/dodaj-knjigu.component';
 import { AdminComponent } from './admin/admin.component';
-import { SviKorisniciComponent } from './svi-korisnici/svi-korisnici.component'
+import { SviKorisniciComponent } from './svi-korisnici/svi-korisnici.component';
+import { ZahtevZaKnjiguComponent } from './zahtev-za-knjigu/zahtev-za-knjigu.component';
+import { PregledZahtevaZaKnjigomComponent } from './pregled-zahteva-za-knjigom/pregled-zahteva-za-knjigom.component'
+import { CanvasJSChart } from 'src/assets/canvasjs.angular.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { SviKorisniciComponent } from './svi-korisnici/svi-korisnici.component'
     IstorijaComponent,
     DodajKnjiguComponent,
     AdminComponent,
-    SviKorisniciComponent
+    SviKorisniciComponent,
+    ZahtevZaKnjiguComponent,
+    PregledZahtevaZaKnjigomComponent,
+    CanvasJSChart
   ],
   imports: [
     BrowserModule,

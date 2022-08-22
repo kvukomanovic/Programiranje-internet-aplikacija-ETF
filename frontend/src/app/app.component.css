@@ -3,14 +3,11 @@
     border-style: double;
 }
 menu, ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    width: 400px;
-  }
-  
-
-  
+  display: flex;
+  list-style: none;
+  padding: 0;
+  width: 400px;
+}
 button {
     width: 100%;
 }
@@ -26,8 +23,11 @@ li {
   flex-grow: 1;
 }
 button{
+ /* min-height: fit-content;*/
   height: 40px;
   background-color:rgba(255, 196, 107, 0.533);
+  border: 3px solid rgb(190, 167, 138);
+  color: rgb(105, 84, 65);
   border-radius: 2%;
   font-weight: bold;
   text-align: center;
@@ -35,11 +35,55 @@ button{
 menu{
   width: 100%;
 }
+@media screen and (max-width: 800px){
+  menu, ul {
+    display: block;
+    list-style: none;
+    padding: 0;
+  }
+  button {
+      width: 100%;
+  }
+  
+  #profilepic{
+    max-height: 35px;
+    max-width: 35px;
+    height: auto;
+    width: auto;
+    align-content: center;
+  }
+  li {
+    flex-grow: 1;
+  }
+}
+#divv #footer{
+ 
+ text-align: center;
+ width: 100%;
+ display: flex;
+  flex-direction: column;
+  position: absolute;
+ bottom: 30px;
+}
 
-.footer{
-  position:fixed;
-  bottom: 0;
-  left:0;
-  width: 100%;
-  text-align: center;
+.page{
+  min-height:100vh;
+  position: relative;
+}
+#divv{
+  min-height: 50px;
+  display: block;
+}
+#header{
+  background-image:url('/assets/books2.jpg');
+  height: 100%;
+  margin: 0;
+  padding: 5px;
+}
+#headerText{
+  background-color: rgba(241, 235, 222, 0.645);
+  width: fit-content;
+  border-radius: 10px;
+  color: rgb(91, 96, 101);
+  margin-left: 15px;
 }

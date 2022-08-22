@@ -36,6 +36,12 @@ let User = new Schema({
     },
     deadline:{
         type:Number
+    },
+    blocked:{
+        type:Boolean
+    },
+    notifications:{
+        type:Array<String>
     }
 })
 

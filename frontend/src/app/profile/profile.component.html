@@ -1,4 +1,5 @@
-<table>
+<h3>Moj profil:</h3>
+<table *ngIf="!izmeni" id="profil">
     <tr >
         <td class="firstColumn">Ime:</td>
         <td class="secondColumn"> {{user.firstname}}</td>
@@ -28,3 +29,70 @@
        
     
 </table>
+
+
+<table *ngIf="izmeni" id="profil">
+    <tr >
+        <td class="firstColumn">Ime:</td>
+        <td class="secondColumn">
+            <input type="text" value="{{user.firstname}}" [(ngModel)]="user.firstname">
+        </td>
+        <td rowspan="6" *ngIf="!izmeni"><img  style="max-width:100px ;" src="{{user.picture}}"></td>
+        <td rowspan="6">
+            <div *ngIf="izmeni">
+                <div class="selected-image no-border" *ngIf="image!=null"><img style="max-width: 100px; max-height: 100px;" src="{{image}}" /></div>
+                <input type="file" accept=".jpg,.png" (change)="change($event)">
+            </div>
+        </td>
+    </tr>
+    <tr >
+        <td class="firstColumn">Prezime:</td>
+        <td class="secondColumn"> <input type="text" value="{{user.lastname}}" [(ngModel)]="user.lastname">
+        </td>
+    </tr>
+    <tr >
+        <td class="firstColumn">Korisnicko ime:</td>
+        <td class="secondColumn"> <input type="text" value="{{user.username}}" [(ngModel)]="user.username"></td>
+
+    </tr>
+    <tr >
+        <td class="firstColumn">Email:</td>
+        <td class="secondColumn">  <input type="text" value="{{user.email}}" [(ngModel)]="user.email"></td>
+    </tr>
+    <tr >
+        <td class="firstColumn">Telefon:</td>
+        <td class="secondColumn">  <input type="text" value="{{user.phone}}" [(ngModel)]="user.phone"></td>
+    </tr>
+    <tr >
+        <td class="firstColumn">Adresa:</td>
+        <td class="secondColumn">  <input type="text" value="{{user.address}}" [(ngModel)]="user.address"></td>
+    </tr>
+    
+       
+    
+</table>
+<button (click)="izmeniF()" *ngIf="!izmeni">Izmeni informacije</button>
+<button (click)="sacuvaj()" *ngIf="izmeni">Sacuvaj</button>
+<button (click)="nazad()" *ngIf="izmeni">Nazad</button>
+<hr>
+<h3>Promena lozinke:</h3>
+<div id="passchange">
+    <table>
+        <tr>
+            <td>Nova lozinka:</td>
+            <td><input type="password" [(ngModel)]="newpassword"></td>
+        </tr>
+        <tr>
+            <td>Ponovljena lozinka:</td>
+            <td><input type="password" [(ngModel)]="newpassword2"></td>
+        </tr>
+    </table>
+</div>
+<button (click)="promeniLozinku()">Promeni lozinku</button>
+<br><br><br>
+<div *ngIf="showMeseci">
+    <canvasjs-chart [options]="chartOptions" [styles]="{ width: '500px', height:'300px'}"></canvasjs-chart>    
+</div>  
+<div *ngIf="showGenre">
+    <canvasjs-chart [options]="genreChartOptions" [styles]="{ width: '500px', height:'300px'}"></canvasjs-chart>    
+</div>  

@@ -13,6 +13,7 @@ export class DodajKnjiguComponent implements OnInit {
   constructor(private booksService:BooksService,private router:Router) { }
 
   ngOnInit(): void {
+    this.image_data='/assets/book.jpg';
     let user:User=JSON.parse(localStorage.getItem("user"));
     if (user==null) this.router.navigate(['']);
     else if (user.type=="citalac") this.router.navigate(['pocetnaKorisnik']);
@@ -26,7 +27,6 @@ export class DodajKnjiguComponent implements OnInit {
   language:string;
   picture:File;
   image_data;
-  image:any;
   available:number;
   correctInput:boolean=true;
 
@@ -47,8 +47,7 @@ export class DodajKnjiguComponent implements OnInit {
       message+="Morate uneti pozitivan broj kopija!\n";
     }
     if(this.image_data==null) {
-      this.correctInput=false;
-      message+="Unesite sliku korica knjige!\n";
+      this.image_data='/assets/book.jpg';
     }
     if (!this.correctInput) alert(message);
   }
@@ -60,7 +59,6 @@ export class DodajKnjiguComponent implements OnInit {
       reader.readAsDataURL(input.files[0]);
       reader.onloadend = (e) => {
         this.image_data = reader.result;
-        this.image = reader.result;
       }
 
     }
@@ -70,7 +68,7 @@ export class DodajKnjiguComponent implements OnInit {
     this.correctInput=true;
      this.validator();
      if (this.correctInput){ 
-      this.booksService.addBook(this.title,this.author,this.genre,this.publisher,this.year,this.language,this.image,this.available).subscribe((resp)=>{
+      this.booksService.addBook(this.title,this.author,this.genre,this.publisher,this.year,this.language,this.image_data,this.available).subscribe((resp)=>{
         if (resp["message"]=="ok"){
            alert("Uspesno dodata knjiga!");
            window.location.reload();

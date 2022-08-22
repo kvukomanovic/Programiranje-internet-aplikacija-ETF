@@ -186,14 +186,15 @@ export class SviKorisniciComponent implements OnInit {
       if (this.zahtevi[i]._id==_idzahteva) break;
     let z=this.zahtevi[i];
     this.userService.addUser(z.username,z.password,z.firstname,z.lastname,z.email,z.phone,z.address,z.type,z.picture).subscribe((resp)=>{
-      if (resp['message']=="ok"){
+      if (resp['message']=="Korisnik je uspesno dodat"){
         this.userService.denyRequest(_idzahteva).subscribe((resp2)=>{
-          if (resp['message']=="ok"){
-            alert("Uspesno obrisan zahtev");
+          if (resp2['message']=="ok"){
+            alert("Uspesno prihvacen zahtev");
             this.ngOnInit();
           } 
+          else alert(resp2['message']);
         })
-      }
+      } else alert(resp['message']);
     })
 
   }
@@ -217,5 +218,16 @@ export class SviKorisniciComponent implements OnInit {
     })
   }
   /*---------------------------------------------------- */
+  block(user:User){
+    this.userService.block(user._id).subscribe(()=>{
+      this.ngOnInit();
+    })
+  }
+  /*---------------------------------------------------- */
+  unblock(user:User){
+    this.userService.unblock(user._id).subscribe(()=>{
+      this.ngOnInit();
+    })
+  }
   /*---------------------------------------------------- */
 }

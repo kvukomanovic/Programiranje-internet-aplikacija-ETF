@@ -11,4 +11,6 @@ export class User{
     picture:Buffer;
     type:string;
     deadline:number;
+    blocked:boolean;
+    notifications:Array<string>;
 }

@@ -39,6 +39,12 @@ let User = new Schema({
     },
     deadline: {
         type: Number
+    },
+    blocked: {
+        type: Boolean
+    },
+    notifications: {
+        type: (Array)
     }
 });
 exports.default = mongoose_1.default.model("UserModel", User, 'users');

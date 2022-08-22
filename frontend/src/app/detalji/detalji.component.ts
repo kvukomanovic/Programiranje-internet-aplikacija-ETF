@@ -1,9 +1,11 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { throwIfEmpty } from 'rxjs';
 import { BooksService } from '../books.service';
 import { Book } from '../models/book';
 import { Borrowing } from '../models/borrowing';
+import { Reservation } from '../models/reservation';
 import { User } from '../models/user';
 import { UserService } from '../user.service';
 
@@ -21,13 +23,21 @@ export class DetaljiComponent implements OnInit {
     this.user=JSON.parse(localStorage.getItem("user"));
     if (this.user==null){ this.router.navigate(['']); return;}
     if (this.book==null){ this.router.navigate(['pocetnaKorisnik']); return;}
- 
-    if (this.user!=null){
-      this.ready=true;
-      if (this.user.type!="admin")
+
+    this.userService.getUser(this.user._id).subscribe((user:User)=>{
+      this.user=user;
+      if (this.user.blocked){ this.router.navigate(['pocetnaKorisnik']); return;}
+      if (this.user.type!="admin"){
         this.daLiMozeDaIznajmi();
-    } 
-    this.book.comments.sort((a,b) => -(new Date(a.timestamp).getTime()-new Date(b.timestamp).getTime()));
+      } else this.ready=true;
+    })
+    this.bookService.getBook(this.book._id).subscribe((book:Book)=>{
+      this.book=book;
+      this.image=book.pic;
+      this.book.comments.sort((a,b) => -(new Date(a.timestamp).getTime()-new Date(b.timestamp).getTime()));
+    })
+    
+  
   }
 
   book:Book;
@@ -49,27 +59,25 @@ export class DetaljiComponent implements OnInit {
   zaduzi(){
     let rok;
     let cando=true;
-    if (this.nevracene.length==3) cando=false;
+    if (this.nevracene.length==3){ cando=false;this.message="Ne mozete zaduziti knjigu."; return;}
     else{
-    this.userService.getRok().subscribe((admin:User)=>{
-      rok=admin.deadline;
-      this.nevracene.forEach(borrow=>{
-        if ((new Date(new Date().toISOString().slice(0,10)).getTime() - new Date(borrow.date).getTime())/(1000*3600*24)
-        > rok){
-          cando=false;
-        }
-      })  
+       this.userService.getRok().subscribe((admin:User)=>{
+          rok=admin.deadline;
+          this.nevracene.forEach(borrow=>{
+              if ((new Date(new Date().toISOString().slice(0,10)).getTime() - new Date(borrow.date).getTime())/(1000*3600*24)
+             >= rok)    cando=false;
+          })  
+          if (!cando) this.message="Ne mozete zaduziti knjigu."
+         else this.bookService.zaduzi(this.user.username,this.book).subscribe((resp)=>{
+          if (resp["message"]=="ok") {alert("Uspesno ste zaduzili knjigu!"); this.getBook();}
+         else alert("Neuspesno zaduzivanje. Pokusajte ponovo");
       
+     })
     })
-  }
-    if (!cando) this.message="Ne mozete zaduziti knjigu."
-    else this.bookService.zaduzi(this.user.username,this.book).subscribe((resp)=>{
-      if (resp["message"]=="ok") {alert("Uspesno ste zaduzili knjigu!"); this.getBook();}
-      else this.message="Neuspesno zaduzivanje. Pokusajte ponovo";
-    })
-   
-  }
 
+   
+    }
+  }
   /*------------------------------------------------------------------- */
   prosecnaOcenaF():number{
     if (this.book.comments.length==0 || this.book.comments==null) return 0;
@@ -137,6 +145,10 @@ export class DetaljiComponent implements OnInit {
       this.bookService.getBook(this.book._id).subscribe((book:Book)=>{
         this.book=book;
         localStorage.setItem("book",JSON.stringify(this.book));
+        if (this.book.available>0){
+          this.srediRezervacije(this.book,0);
+        }
+        this.ngOnInit();
       })
     })
     this.izmena=false;
@@ -169,6 +181,14 @@ export class DetaljiComponent implements OnInit {
       })
 
       this.prikaziDugme=(moze && this.book.available>0);
+      let i;
+      this.mozeDaRez=true;
+    for(i=0;i<this.nevracene.length;i++)
+     if (this.nevracene[i].bookID==this.book._id){
+        this.mozeDaRez=false;
+      }
+    this.mozeDaRez=(this.mozeDaRez && this.book.available==0);
+    this.ready=true;
     })
   }
    /*-------------------------------------------------------------- */
@@ -188,4 +208,59 @@ export class DetaljiComponent implements OnInit {
     }
   }
   /*--------------------------------------------------------------- */
+  izmeniKom:boolean=false;
+  izmeniKomF(){
+    this.izmeniKom=true;
+  }
+  sacuvajKom(){
+    let i;
+    for(i=0;i<this.book.comments.length;i++)
+    if (this.book.comments[i].username==this.user.username) break;
+
+    this.book.comments[i].timestamp=new Date().toISOString();
+    this.book.comments[i].edited=true;
+    this.bookService.editBook(this.book).subscribe((resp)=>{
+           this.izmeniKom=false;
+           this.ngOnInit();
+    })
+  }
+  nazad(){
+    this.izmeniKom=false;
+    this.ngOnInit();
+  }
+  /*--------------------------------------------------------- */
+  mozeDaRez:boolean;
+  
+  /*------------------------------------------------------ */
+  rezervisi(){
+    this.bookService.getReservationsForUser(this.user._id).subscribe((reservations:Reservation[])=>{
+      for(let i=0;i<reservations.length;i++)
+        if (reservations[i].bookID==this.book._id) {
+          alert("Vec imate rezervaciju za ovu knjigu.");
+          return;
+        }
+      
+      this.bookService.reserve(this.book._id,this.user._id).subscribe((resp)=>{
+        if (resp['message']=="ok"){
+           alert("Uspesno ste rezervisali knjigu.");
+           this.ngOnInit();
+        }
+      })
+    })
+    
+  }
+  /*-------------------------------------------------- */
+  srediRezervacije(b:Book,i:number){
+    this.bookService.srediRez(b,i).subscribe((resp)=>{
+        if (resp['message']=="ok" || resp['message']=="nothing to do") this.ngOnInit();
+        else this.srediRezervacije(b,i+1);
+    })
+  }
+
+ /*-------------------------------------------------- */
+ nazadB(){
+  this.book=JSON.parse(localStorage.getItem("book"));
+  this.image=this.book.pic;
+  this.izmena=false;
+ }
 }

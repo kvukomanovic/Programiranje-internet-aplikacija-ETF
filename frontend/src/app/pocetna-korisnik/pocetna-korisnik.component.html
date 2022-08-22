@@ -1,12 +1,51 @@
 <h2>Knjiga dana!</h2>
 <div *ngIf="ready">
-<img *ngIf="ready" src="{{randomBook.pic}}"> <br>
-<table>
- <tr>
-    <td style="font-style: oblique; font-weight: bolder;">{{randomBook.title}}</td>
-    <td *ngFor="let a of randomBook.author">, {{a}}</td> 
- </tr>
-</table>
-Prosecna ocena:{{prosecnaOcena()}}
+<div id="image"><img *ngIf="ready" src="{{randomBook.pic}}"> </div>
+<div id="details">
+   <span id="title">{{randomBook.title}}</span>
+   <span id="authors" *ngFor="let a of randomBook.author">, {{a}}</span>
 </div>
+
+<div id="ocena">Prosecna ocena:  {{prosecnaOcena()}}</div>
+</div>
+
+<hr>
+
+   <table *ngIf="ready" id="noth-container">
+      <tr *ngFor="let n of user.notifications">
+         <td>
+            <div id="notification">
+               {{n}}
+            </div>
+         </td>
+      </tr>
+      <tr *ngIf="user.blocked">
+         <td>
+            <div id="notification">
+               Blokirani ste od strane admina. Mozete razduziti knjige.
+            </div>
+         </td>
+      </tr>
+      <tr *ngIf="isticeRok">
+         <td>
+            <div id="notification">
+               Uskoro vam istice rok za vracanje knjige.
+            </div>
+         </td>
+      </tr>
+      <tr *ngIf="istekaoRok">
+         <td>
+            <div id="notification">
+               Istekao je rok za vracanje knjige.
+            </div>
+         </td>
+      </tr>
+      <tr *ngIf="cnt==3">
+         <td>
+            <div id="notification">
+              Trenutno ste zaduzili maksimalni broj knjiga.
+            </div>
+         </td>
+      </tr>
+   </table>
 

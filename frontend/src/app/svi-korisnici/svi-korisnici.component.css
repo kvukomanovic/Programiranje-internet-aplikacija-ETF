@@ -7,7 +7,18 @@ td{
 th{
     background-color: antiquewhite;
 }
-input{
+#addUser input{
     padding: 2px 2px 2px 2px;
     width: 95%;
+}
+#users input{
+    width: 95%;
+}
+h3{
+    color: rgb(138, 111, 111);
+}
+hr {
+    height: 5px;
+    background-color: rgb(213, 202, 191);
+    margin: 30px 0 30px 0;
 }

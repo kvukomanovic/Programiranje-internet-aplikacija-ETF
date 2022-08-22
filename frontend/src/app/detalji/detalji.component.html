@@ -1,15 +1,32 @@
 <div *ngIf="ready">
 
 <h2>{{book.title}}</h2>
-<table>
-<tr>
-    <td>
-<img *ngIf="!izmena" src="{{book.pic}}">
-<div *ngIf="izmena">
-    <input type="file" accept=".jpg,.png" (change)="change($event)">
-        <div class="selected-image no-border" *ngIf="image!=null"><img style="max-width: 100px; max-height: 100px;" src="{{image}}" /></div>
-</div>
-<table id="t" >
+
+<table id="table1">
+    <tr colspan="6">
+        <td>
+             <img src="{{image}}">
+             <div *ngIf="izmena" id="chooseFile">
+                <input type="file" accept=".jpg,.png" (change)="change($event)">
+             </div>
+        </td>
+        <td>
+            <div id="stanje">
+                Na stanju: <span *ngIf="!izmena" style="font-weight: bolder;">{{book.available}}</span>
+                           <span *ngIf="izmena"><input type="number" min="0" value="book.available" [(ngModel)]="book.available"></span>
+            </div>
+            <div id="buttons">
+                <button [disabled]="!prikaziDugme" (click)="zaduzi()">Zaduzi</button>
+                     <span style="color:crimson">{{message}}</span>
+                <button *ngIf="user.type!='citalac' && !izmena" (click)="izmeni()">Izmeni informacije</button>
+                <button *ngIf="izmena" (click)="sacuvaj()">Sacuvaj izmene</button><button *ngIf="izmena" (click)="nazadB()">Nazad</button>
+                <button *ngIf="user.type=='admin'" (click)="obrisiKnjigu()">Obrisi knjigu</button>
+                <button *ngIf="user.type!='admin'" [disabled]="!mozeDaRez" (click)="rezervisi()">Rezervisi</button>
+            </div>     
+        </td>
+    </tr>
+</table>   
+<table id="table2" >
     <tr> 
         <td>Naziv: </td>
         <td *ngIf="!izmena">{{book.title}}</td>
@@ -48,47 +65,46 @@
         <td *ngIf="!izmena">{{book.language}}</td>
         <td *ngIf="izmena"><input type="text" value="book.language" [(ngModel)]="book.language"></td>
     </tr>
-</table></td>
-<td>
-    Na stanju: <p *ngIf="!izmena" style="font-weight: bolder;">{{book.available}}</p><p *ngIf="izmena"><input type="number" min="0" value="book.available" [(ngModel)]="book.available"></p>
-    <button [disabled]="!prikaziDugme" (click)="zaduzi()">Zaduzi</button><br>
-    <br>
-    <span style="color:crimson">{{message}}</span>
-    <button *ngIf="user.type!='citalac' && !izmena" (click)="izmeni()">Izmeni informacije</button>
-    <button *ngIf="izmena" (click)="sacuvaj()">Sacuvaj izmene</button>
-    <br><br><button *ngIf="user.type=='admin'" (click)="obrisiKnjigu()">Obrisi knjigu</button><br>
-</td>
-</tr>
 </table>
+
 <hr>
-<h2 *ngIf="!imaKomentaraF()" style="color:orange; font-weight: bolder;">Nema ocena i komentara za ovu knjigu. Budite prvi koji ce komentarisati!</h2>
+<h2 *ngIf="!imaKomentaraF()" id="nemaKomentara">Nema ocena i komentara za ovu knjigu. Budite prvi koji ce komentarisati!</h2>
 <div *ngIf="imaKomentaraF()">
     
-    <h3>Prosecna ocena: {{prosecnaOcenaF()}} <br></h3>
-    <h3 style="background-color: khaki">Komentari:</h3>
-    <table>
-        <tr *ngFor="let c of book.comments" style="background-color:blanchedalmond">
+    <h3 id="prosek">Prosecna ocena: {{prosecnaOcenaF()}} <br></h3>
+    <h3 style="background-color: khaki;padding-left: 5px; border-radius: 5px;">Komentari:</h3>
+    <table id="comments">
+        <tr *ngFor="let c of book.comments">
             <td>
-                <div id="user">{{c.username}} : {{c.rating}}<br> </div>
-                <div id="timestamp"> {{c.timestamp.slice(0,10)}} {{c.timestamp.slice(11,16)}} <br></div>
-                <div id="comment">{{c.comment}}</div>
+                <div  id="commentBox">
+                    <div id="user" *ngIf="!izmeniKom">{{c.username}} : {{c.rating}}<br> </div>
+                    <div *ngIf="izmeniKom">{{c.username}} : <input type="number" value="c.rating" [(ngModel)]="c.rating"><br> </div>
+                    <div *ngIf="c.edited" id="edited">Edited</div>
+                    <div id="timestamp"> {{c.timestamp.slice(0,10)}} {{c.timestamp.slice(11,16)}} </div>
+                    <div id="comment" *ngIf="!izmeniKom">{{c.comment}}</div>
+                    <div id="comment" *ngIf="izmeniKom"><input type="text" value="c.comment" [(ngModel)]="c.comment"  maxlength="1000" style="width: 50%; height: 50pt"></div>
+                    <div *ngIf="user.username==c.username && !izmeniKom" id="izmeni"><button (click)="izmeniKomF()">Izmeni</button></div>
+                    <div *ngIf="izmeniKom"><button (click)="sacuvajKom()" id="sacuvaj">Sacuvaj</button></div>
+                    <div *ngIf="izmeniKom"><button (click)="nazad()" >Nazad</button></div>
+                </div>
             </td>
         </tr>
    
     </table>
 </div>
 <div *ngIf="mozeDaKomentariseF()">
-    <h3 style="background-color: lightsteelblue">Dodaj komentar:</h3>
-    <div style="background-color: lavender">
-    <div style="font-size: larger">Ocena:
-                    <select [(ngModel)]="rating"> 
-                        <option *ngFor='let i of "1,2,3,4,5,6,7,8,9,10".split(",")'>{{i}}</option>
-                    </select><br>
+    <h3 style="background-color: lightsteelblue;padding-left: 5px; border-radius: 5px;">Dodaj komentar:</h3>
+    <div id="addCommentBox">
+        <div style="font-size: larger">Ocena:
+                        <select [(ngModel)]="rating"> 
+                            <option *ngFor='let i of "1,2,3,4,5,6,7,8,9,10".split(",")'>{{i}}</option>
+                        </select><br>
+        </div>
+        <div style="font-size: larger">Komentar:</div>
+        <input type="text" maxlength="1000" style="width: 50%; height: 50pt" [(ngModel)]="comment">
+        <br>
+        <button (click)="addComment()">Dodaj komentar</button> 
     </div>
-    <div style="font-size: larger">Komentar:</div>
-    <input type="text" maxlength="1000" style="width: 50%; height: 50pt" [(ngModel)]="comment">
-    <br>
-    <button (click)="addComment()">Dodaj komentar</button> </div>
 </div>
 
 </div>

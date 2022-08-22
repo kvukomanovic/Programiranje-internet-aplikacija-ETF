@@ -1,11 +1,12 @@
 #searched{
-    border: 1px black ;
+    border: 1px rgb(97, 76, 76) ;
     border-style: double;
     
 }
 #searched th{
     border: 1px  black ;
     border-style: double;
+    background-color: rgb(177, 221, 231);
 }
 #searched td{
     border: 1px black ;
@@ -15,4 +16,35 @@ img{
     max-height: 100px;
     height: auto;
     width: auto;
+}
+#table1{
+    margin-bottom: 20px;
+    background-color: rgb(245, 221, 173);
+    padding: 15px;
+    border-radius: 15px;
+}
+#table2{
+    margin-top:10px ;
+    background-color: rgb(247, 235, 220);
+    padding: 15px;
+    border-radius: 15px;
+}
+#napredna{
+    padding-left: 15px;
+}
+#button{
+    padding: 5px 10px 5px 10px;
+    margin-left: 250px;
+    margin-top: 15px;
+}
+h2{
+    padding-left: 10px;
+}
+h3{
+    padding:15px 10px 15px 10px;
+    color: rgb(97, 78, 78);
+    background-color: rgb(202, 225, 237);
+    border-radius: 5px;
+    width: fit-content;
+    border: 5px solid rgb(240, 233, 209);
 }

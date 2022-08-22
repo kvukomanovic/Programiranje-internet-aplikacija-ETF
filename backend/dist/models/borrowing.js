@@ -27,6 +27,9 @@ let Borrowing = new Schema({
     },
     author: {
         type: Array
+    },
+    prolonged: {
+        type: Boolean
     }
 });
 exports.default = mongoose_1.default.model("BorrowingrModel", Borrowing, 'borrowings');

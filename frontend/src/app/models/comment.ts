@@ -4,4 +4,5 @@ export class Comment{
     rating:number;
     comment:string;
     timestamp:string;
+    edited:boolean;
 }

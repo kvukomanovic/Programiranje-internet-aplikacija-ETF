@@ -6,16 +6,18 @@
             <tr>
                 <td *ngFor="let b of zaduzenja">
                  <div class="card">
-                     <img src="{{pic(b)}}" style="max-width:200px; max-height: 200px;">
+                     <img src="{{pic(b)}}">
                         <div class="container">
                          <h4><b>{{b.title}}</b></h4>
-                         <span *ngFor="let a of b.author">{{a}} <br></span>
+                         <span *ngFor="let a of b.author">{{a}}<br></span>
                          <span *ngIf="dana(b)>=0" style="color:green">Preostalo dana: {{dana(b)}}</span>
                          <span *ngIf="dana(b)<0" style="color:red; font-weight: bolder;">Kasnite dana: {{-dana(b)}}</span>
+                         <br>
+                         <button (click)="razduzi(b)">Razduzi</button>
+                         <button *ngIf="!b.prolonged" (click)="produzi(b)">Produzi</button>
                         </div>
-                        <footer>
-                            <button (click)="razduzi(b)">Razduzi</button>
-                        </footer>
+                        
+                        
                  </div>
                 </td>
                 

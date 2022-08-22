@@ -6,4 +6,5 @@ export class Borrowing{
     returned: string;
     bookID:string;
     author:Array<string>;
+    prolonged:boolean;
   }

@@ -53,6 +53,9 @@ let Book = new Schema({
                 },
                 timestamp: {
                     type: String
+                },
+                edited: {
+                    type: Boolean
                 }
             }]
     }

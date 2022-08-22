@@ -3,32 +3,122 @@ img{
     max-height: 480px;
     height: auto;
     width: auto;
+    border-radius:0 15px 15px 0;
+    padding-bottom: 15px;
 }
-#t{
-    width: 90%;
-    border: 2px purple;
-    border-style: dotted;
+#table2{
+    margin-top: 20px;
+    min-width: 350px;
+    width: 30%;
+    border: 5px rgb(212, 190, 161);
+    border-style: solid;
+    margin-left: 5px;
+    background-color:seashell;
+    border-radius: 5px;
 }
-#t tr{
-    border: 2px purple;
-    border-style: dotted;
+#table2 tr{
+   /* border: 2px purple;
+    border-style: dotted;*/
 }
-#t td{
-    border: 2px purple;
-    border-style: dotted;
+#table2 td{
+    border: 2px rgb(238, 227, 193);
+    border-style:groove ;
     height: 30px;
+    padding: 5px;
 }
-table{
+#comments{
     width: 70%;
 }
+#commentBox{
+    background-color:blanchedalmond;  
+    border-radius: 10px;
+}
 #user{
+    padding-top: 5px;
+    padding-left: 5px;
     font-size: larger;
      font-weight: bold;
 }
 #timestamp{
+    padding-left: 5px;
     font-weight: lighter;
     font-size: smaller;
 }
 #comment{
+    padding-left: 5px;
     font-size: larger;
+    padding-bottom: 5px;
+}
+#edited{
+    color: rgb(164, 104, 62);
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    position: relative;
+    font-size: smaller;    
+}
+
+#izmeni button{
+    width: 75px;
+    background-color:burlywood;
+    float: right;
+    border-radius: 5px;
+    margin-top: 5px;
+    /*margin-right: 10px;
+    margin-bottom: 2px;
+    position: relative;*/
+}
+  #prosek{
+    padding:10px;
+    border-radius: 5px;
+    background-color: rgb(255, 193, 170);
+    width: max-content;
+    color: rgb(0, 0, 0);
+  }
+#addCommentBox{
+    background-color: lavender;
+    border-radius: 10px;
+}
+#nemaKomentara{
+    color:orange;
+    font-weight: bolder;
+    background-color: antiquewhite;
+    padding: 15px;
+    border-radius: 10px;
+}
+#table1{
+    width: max-content;
+}
+#table1 td{
+    padding-left: 5px;
+}
+h2{
+    padding-left: 5px;
+}
+#stanje{
+    background-color: antiquewhite;
+    padding: 15px;
+    border-radius: 5px;
+    border: 5px solid rgb(248, 213, 184);
+}
+#buttons{
+    margin-top: 15px;
+    display: grid;
+    row-gap: 15px;
+}
+#buttons button{
+    width: 100px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+
+}
+#chooseFile{
+    width: min-content;
+    max-width: 150px;
+}
+#stanje input{
+    width:40px;
+}
+ul{
+    padding: 0 0 0 15px;
 }

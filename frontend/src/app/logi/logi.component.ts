@@ -15,21 +15,24 @@ export class LogiComponent implements OnInit {
 
 
   ngOnInit(): void {
+    let user:User=JSON.parse(localStorage.getItem("user"));
+    if (user!=null){this.router.navigate(['pocetnaKorisnik']);return;}
+   
   }
 
   username:string;
   password:string;
-  type:string;
+ // type:string;
   message:string;
 
-  usernameR:string;
-  passwordR:string;
-  password2R:string;
-  firstnameR:string;
-  lastnameR:string;
-  addressR:string;
-  phoneR:string;
-  emailR:string;
+  usernameR:string="";
+  passwordR:string="";
+  password2R:string="";
+  firstnameR:string="";
+  lastnameR:string="";
+  addressR:string="";
+  phoneR:string="";
+  emailR:string="";
   image:any;
   image_data;
 
@@ -53,6 +56,7 @@ export class LogiComponent implements OnInit {
     } else this.userService.register(this.usernameR,this.password2R,this.firstnameR,this.lastnameR,this.emailR,
         this.phoneR,this.addressR,this.image_data).subscribe((resp)=>{
          alert(resp['message']);
+         window.location.reload();
         })
     
     
@@ -73,6 +77,12 @@ export class LogiComponent implements OnInit {
   /*---------------------------------------------- */
   proveri():boolean{
     this.messageR="";
+    if (this.usernameR=="" || this.passwordR=="" 
+    || this.firstnameR=="" || this.lastnameR=="" 
+    || this.addressR=="" || this.phoneR==""
+    || this.emailR==""){
+      this.messageR+="Unesite sve podatke!\n";
+    }
     let user:User=new User();
     user.username=this.usernameR;user.password=this.passwordR;
     user.firstname=this.firstnameR;user.lastname=this.lastnameR;
@@ -89,7 +99,7 @@ export class LogiComponent implements OnInit {
       this.messageR+="Prvo slovo imena i prezime mora biti veliko!\n";
     //format lozinke
     let pass=/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&])[A-Za-z][a-zA-z0-9!@#$%^&]{7,11}$/;
-    if (!pass.test(user.password)) this.messageR+="Los format sifre.\n";
+    if (!pass.test(user.password)) this.messageR+="Los format sifre. Lozinka mora pocinjati slovom, sadrzati bar jedno veliko slovo, jedan specijalni karakter(!@#$%^&) i jednu cifru i biti duzine od 8 do 12 cifara.\n";
     // format mejla
     let email=/^[a-zA-z\d]+@[a-z\d](.[a-z])+$/;
     if (!email.test(user.email)) this.messageR+="Los format emaila. Primer: example@gmail.com\n";
