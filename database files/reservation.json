@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "6303a06cd8da4fcd16b2e054"
+  },
+  "bookID": {
+    "$oid": "62f51d27f83e59d27e58470e"
+  },
+  "userID": {
+    "$oid": "62fa6235914ca1decf99cfff"
+  },
+  "timestamp": "2022-08-22T15:27:40.570Z",
+  "__v": 0
+}]

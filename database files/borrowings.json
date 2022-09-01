@@ -1,0 +1,331 @@
+[{
+  "_id": {
+    "$oid": "630395a8709e227638fa4656"
+  },
+  "username": "kaca",
+  "title": "Welcome to Night Vale",
+  "date": "2022-01-22",
+  "returned": "2022-01-22",
+  "bookID": {
+    "$oid": "62f51d6df83e59d27e584710"
+  },
+  "author": [
+    "Joseph Find",
+    "Jeffrey Cranor"
+  ],
+  "prolonged": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "630395ae709e227638fa4665"
+  },
+  "username": "kaca",
+  "title": "The Lost Symbol",
+  "date": "2022-03-22",
+  "returned": "2022-03-22",
+  "bookID": {
+    "$oid": "6302710e34f399d7956e0aa0"
+  },
+  "author": [
+    "Dan Brown"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "630395be709e227638fa4694"
+  },
+  "username": "kaca",
+  "title": "Twilight",
+  "date": "2022-04-22",
+  "returned": "2022-04-22",
+  "bookID": {
+    "$oid": "62f657df525aa64c4ff86ff9"
+  },
+  "author": [
+    "Stephenie Meyer"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "630397cd709e227638fa46e7"
+  },
+  "username": "kaca",
+  "title": "The Alchemist",
+  "date": "2022-05-22",
+  "returned": "2022-08-22",
+  "bookID": {
+    "$oid": "63039784709e227638fa46a2"
+  },
+  "author": [
+    "Paulo Coelho"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "630397d5709e227638fa46f6"
+  },
+  "username": "kaca",
+  "title": "The Help",
+  "date": "2022-07-22",
+  "returned": "2022-07-22",
+  "bookID": {
+    "$oid": "63039621709e227638fa469c"
+  },
+  "author": [
+    "Kathryn Stockett"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "630397da709e227638fa4705"
+  },
+  "username": "kaca",
+  "title": "Changes",
+  "date": "2022-07-22",
+  "returned": "2022-07-22",
+  "bookID": {
+    "$oid": "63039698709e227638fa469e"
+  },
+  "author": [
+    "Jim Butcher"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303982b709e227638fa4750"
+  },
+  "username": "kaca",
+  "title": "Welcome to Night Vale",
+  "date": "2021-11-22",
+  "returned": "2021-11-29",
+  "bookID": {
+    "$oid": "62f51d6df83e59d27e584710"
+  },
+  "author": [
+    "Joseph Find",
+    "Jeffrey Cranor"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "630398d0709e227638fa47e9"
+  },
+  "username": "kaca",
+  "title": "Relic",
+  "date": "2022-08-22",
+  "returned": "2022-08-22",
+  "bookID": {
+    "$oid": "62f51d27f83e59d27e58470e"
+  },
+  "author": [
+    "Douglas Preston",
+    "Lincoln Child"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "630398ef709e227638fa482a"
+  },
+  "username": "kaca",
+  "title": "Relic",
+  "date": "2022-08-22",
+  "returned": null,
+  "bookID": {
+    "$oid": "62f51d27f83e59d27e58470e"
+  },
+  "author": [
+    "Douglas Preston",
+    "Lincoln Child"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303a007d8da4fcd16b2e00f"
+  },
+  "username": "kaca",
+  "title": "The Alchemist",
+  "date": "2022-08-22",
+  "returned": null,
+  "bookID": {
+    "$oid": "63039784709e227638fa46a2"
+  },
+  "author": [
+    "Paulo Coelho"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303a071d8da4fcd16b2e062"
+  },
+  "username": "laza",
+  "title": "The Help",
+  "date": "2022-08-22",
+  "returned": null,
+  "bookID": {
+    "$oid": "63039621709e227638fa469c"
+  },
+  "author": [
+    "Kathryn Stockett"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303a0d3d8da4fcd16b2e080"
+  },
+  "username": "laza",
+  "title": "The Lost Symbol",
+  "date": "2022-06-22",
+  "returned": "2022-08-22",
+  "bookID": {
+    "$oid": "6302710e34f399d7956e0aa0"
+  },
+  "author": [
+    "Dan Brown"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303a0e2d8da4fcd16b2e0a8"
+  },
+  "username": "laza",
+  "title": "Welcome to Night Vale",
+  "date": "2022-04-22",
+  "returned": "2022-04-22",
+  "bookID": {
+    "$oid": "62f51d6df83e59d27e584710"
+  },
+  "author": [
+    "Joseph Find",
+    "Jeffrey Cranor"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303a114d8da4fcd16b2e0ca"
+  },
+  "username": "laza",
+  "title": "Twilight",
+  "date": "2022-06-22",
+  "returned": "2022-06-22",
+  "bookID": {
+    "$oid": "62f657df525aa64c4ff86ff9"
+  },
+  "author": [
+    "Stephenie Meyer"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303a189d8da4fcd16b2e118"
+  },
+  "username": "laza",
+  "title": "Welcome to Night Vale",
+  "date": "2022-07-08",
+  "returned": "2022-07-22",
+  "bookID": {
+    "$oid": "62f51d6df83e59d27e584710"
+  },
+  "author": [
+    "Joseph Find",
+    "Jeffrey Cranor"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303a1e4d8da4fcd16b2e168"
+  },
+  "username": "laza",
+  "title": "Welcome to Night Vale",
+  "date": "2022-08-08",
+  "returned": null,
+  "bookID": {
+    "$oid": "62f51d6df83e59d27e584710"
+  },
+  "author": [
+    "Joseph Find",
+    "Jeffrey Cranor"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303ad3cd8da4fcd16b2e2b9"
+  },
+  "username": "kaca",
+  "title": "Book about school",
+  "date": "2022-08-22",
+  "returned": null,
+  "bookID": {
+    "$oid": "6303ad23d8da4fcd16b2e2a3"
+  },
+  "author": [
+    "N.N"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303b0e8d8da4fcd16b2e3d6"
+  },
+  "username": "pera",
+  "title": "The Talisman",
+  "date": "2022-08-22",
+  "returned": null,
+  "bookID": {
+    "$oid": "62f51ce0f83e59d27e58470c"
+  },
+  "author": [
+    "Stephen King",
+    "Peter Straub"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303b55dd8da4fcd16b2e420"
+  },
+  "username": "anica",
+  "title": "The Talisman",
+  "date": "2022-08-22",
+  "returned": "2022-08-22",
+  "bookID": {
+    "$oid": "62f51ce0f83e59d27e58470c"
+  },
+  "author": [
+    "Stephen King",
+    "Peter Straub"
+  ],
+  "prolonged": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6303b6ebd8da4fcd16b2e47a"
+  },
+  "username": "anica",
+  "title": "Relic",
+  "date": "2022-08-22",
+  "returned": null,
+  "bookID": {
+    "$oid": "62f51d27f83e59d27e58470e"
+  },
+  "author": [
+    "Douglas Preston",
+    "Lincoln Child"
+  ],
+  "prolonged": false,
+  "__v": 0
+}]

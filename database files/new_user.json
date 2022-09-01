@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "6303a641d8da4fcd16b2e1ff"
+  },
+  "username": "ana",
+  "password": "Ana#1234",
+  "firstname": "Ana",
+  "lastname": "Anic",
+  "email": "ana@yahoo.com",
+  "phone": "+38162222222",
+  "address": "Juzni bulevar 6, 11000 Beograd",
+  "picture": "/assets/user.jpg",
+  "type": "citalac",
+  "__v": 0
+}]
